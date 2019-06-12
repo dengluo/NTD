@@ -1,439 +1,463 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.qiangu.ntd.view.widget.ObservableNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@id/swipe_target"
-    style="@style/MyScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:background="@drawable/bg_head"
+        />
+
+    <LinearLayout
+        android:id="@+id/xxx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibtNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginRight="15dp"
+            android:background="@null"
+            android:src="@drawable/iv_navigation"/>
+
+        <TextView
+            android:id="@+id/tvSearch"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/et_search_bg"
+            android:drawableLeft="@drawable/ic_search"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/White"
+            android:gravity="center|left"
+            android:text="闲置财产也赚钱"/>
+
+        <ImageButton
+            android:id="@+id/ibtCustomerService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:src="@drawable/iv_customer_service"/>
+
+        <ImageButton
+            android:id="@+id/ibtMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:src="@drawable/iv_message"/>
+    </LinearLayout>
+
+    <com.qiangu.ntd.view.widget.ObservableNestedScrollView
+        android:id="@id/swipe_target"
+        style="@style/MyScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/xxx"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_head"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|top"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/ibtNavigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:background="@null"
-                    android:src="@drawable/iv_navigation"/>
-
-                <TextView
-                    android:id="@+id/tvSearch"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:drawablePadding="10dp"
-                    android:background="@drawable/et_search_bg"
-                    android:drawableLeft="@drawable/ic_search"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/White"
-                    android:gravity="center|left"
-                    android:text="闲置财产也赚钱"/>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@null"
-                    android:src="@drawable/iv_customer_service"/>
-
-                <ImageButton
-                    android:id="@+id/ibtMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:src="@drawable/iv_message"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:textSize="30dp"
-                android:textColor="@color/White"
-                android:text="下午好~李先生"/>
-
-            <Button
-                android:id="@+id/btnCheckBalances"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="7dp"
-                android:paddingBottom="7dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:shadowColor="#21e01025"
-                android:shadowDy="4"
-                android:shadowDx="0"
-                android:background="@drawable/btn_check_balances_bg"
-                android:textSize="@dimen/small_text"
-                android:textColor="#263276"
-                android:text="查询余额"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:shadowColor="#1a27347d"
-                android:shadowDx="0"
-                android:shadowDy="4"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:padding="20dp"
-                android:background="@drawable/bg_bank_card"
+                android:gravity="center|top"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/img_ntd_select"
-                    android:textSize="@dimen/micro_text"
-                    android:textColor="#212C67"
-                    android:text="6228****9876"/>
-
-                <RelativeLayout
+                    android:id="@+id/tvTips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:layout_marginTop="28dp"
+                    android:textSize="30dp"
+                    android:textColor="@color/White"
+                    android:text="下午好~李先生"/>
+
+                <Button
+                    android:id="@+id/btnCheckBalances"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     android:layout_marginTop="15dp"
-                    android:gravity="top"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="20dp"
+                    android:shadowColor="#21e01025"
+                    android:shadowDy="4"
+                    android:shadowDx="0"
+                    android:background="@drawable/btn_check_balances_bg"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="#263276"
+                    android:text="查询余额"/>
 
-                    <TextView
-                        android:id="@+id/xx"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/micro_text"
-                        android:textColor="#212C67"
-                        android:text="$"/>
+                <RelativeLayout
+                    android:id="@+id/rlBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/llBalance"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="3dp"
-                        android:layout_toRightOf="@+id/xx"
-                        android:textSize="@dimen/big_large_text"
-                        android:textColor="#212C67"
-                        android:text="35012.68"/>
+                        android:visibility="gone"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:shadowColor="#1a27347d"
+                        android:shadowDx="0"
+                        android:shadowDy="4"
+                        android:padding="20dp"
+                        android:background="@drawable/bg_bank_card"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/img_ntd_select"
+                            android:textSize="@dimen/micro_text"
+                            android:textColor="#212C67"
+                            android:text="6228****9876"/>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/xx"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/micro_text"
+                                android:textColor="#212C67"
+                                android:text="$"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="3dp"
+                                android:layout_toRightOf="@+id/xx"
+                                android:textSize="32dp"
+                                android:textColor="#212C67"
+                                android:text="35012.68"/>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/micro_text"
+                                android:textColor="@color/textGrayColor"
+                                android:text="2019/05/18 16:56"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/big_large_text"
+                                android:textColor="#212C67"
+                                android:text="NTD 817"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_below="@+id/llBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp"
+                        android:background="@drawable/bg_blurry"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRecharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/ic_recharge"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="#212C67"
+                            android:text="充值"/>
+
+                        <TextView
+                            android:id="@+id/tvTransfer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/ic_transfer"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="#212C67"
+                            android:text="转账"/>
+
+                        <TextView
+                            android:id="@+id/tvExchange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/ic_exchange"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="#212C67"
+                            android:text="兑换"/>
+
+                        <TextView
+                            android:id="@+id/tvFinancial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/ic_financial"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="#212C67"
+                            android:text="理财"/>
+                    </LinearLayout>
+
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/bg_blurry"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_notice"/>
+
+                    <com.superluo.textbannerlibrary.TextBannerView
+                        android:id="@+id/tvBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:setDirection="bottom_to_top"
+                        app:setGravity="center"
+                        app:setTextColor="#999999"/>
+                </LinearLayout>
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/convenientBanner"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="100dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="30dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="@dimen/micro_text"
-                        android:textColor="@color/textGrayColor"
-                        android:text="2019/05/18 16:56"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="@dimen/big_large_text"
-                        android:textColor="#212C67"
-                        android:text="NTD 817"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:paddingBottom="20dp"
-                android:paddingTop="20dp"
-                android:background="@drawable/bg_blurry"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvRecharge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/ic_recharge"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="#212C67"
-                    android:text="充值"/>
-
-                <TextView
-                    android:id="@+id/tvTransfer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/ic_transfer"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="#212C67"
-                    android:text="转账"/>
-
-                <TextView
-                    android:id="@+id/tvExchange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/ic_exchange"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="#212C67"
-                    android:text="兑换"/>
-
-                <TextView
-                    android:id="@+id/tvFinancial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/ic_financial"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="#212C67"
-                    android:text="理财"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
-                android:background="@drawable/bg_blurry"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_notice"/>
-
-                <com.superluo.textbannerlibrary.TextBannerView
-                    android:id="@+id/tvBanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:setDirection="bottom_to_top"
-                    app:setGravity="center"
-                    app:setTextColor="#999999"/>
-            </LinearLayout>
-
-            <com.bigkoo.convenientbanner.ConvenientBanner
-                android:id="@+id/convenientBanner"
-                android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_height="100dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/big_small_text"
-                    android:textColor="#212C67"
-                    android:text="最近交易"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:drawableRight="@drawable/home_more"
-                    android:drawablePadding="5dp"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/textGrayColor"
-                    android:text="更多"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:background="@color/White"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/left_line"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:textSize="@dimen/big_small_text"
                         android:textColor="#212C67"
-                        android:text="转账"/>
+                        android:text="最近交易"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:drawableRight="@drawable/home_more"
                         android:drawablePadding="5dp"
-                        android:gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:drawableRight="@drawable/pay_ali"
                         android:textSize="@dimen/small_text"
                         android:textColor="@color/textGrayColor"
-                        android:text="2019/05/18"/>
+                        android:text="更多"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="@dimen/small_text"
-                        android:background="@drawable/btn_billing_details"
-                        android:textColor="@color/textGrayColor"
-                        android:text="账单详情"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/textGrayColor"
-                        android:text="金* 6228****9876"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:background="@color/White"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/left_line1"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="vertical">
+                    android:paddingTop="20dp"
+                    android:background="@color/White"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/left_line"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/big_small_text"
+                            android:textColor="#212C67"
+                            android:text="转账"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:drawableRight="@drawable/pay_ali"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="@color/textGrayColor"
+                            android:text="2019/05/18"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/big_small_text"
-                        android:textColor="#212C67"
-                        android:text="充值"/>
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="5dp"
-                        android:gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:drawableRight="@drawable/pay_wechat"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/textGrayColor"
-                        android:text="2019/05/18"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:textSize="@dimen/small_text"
+                            android:background="@drawable/btn_billing_details"
+                            android:textColor="@color/textGrayColor"
+                            android:text="账单详情"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="@color/textGrayColor"
+                            android:text="金* 6228****9876"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:orientation="vertical">
+                    android:paddingTop="20dp"
+                    android:background="@color/White"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
 
-                    <Button
+                    <ImageView
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/left_line1"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/big_small_text"
+                            android:textColor="#212C67"
+                            android:text="充值"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:drawableRight="@drawable/pay_wechat"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="@color/textGrayColor"
+                            android:text="2019/05/18"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="@dimen/small_text"
-                        android:background="@drawable/btn_billing_details"
-                        android:textColor="@color/textGrayColor"
-                        android:text="账单详情"/>
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/textGrayColor"
-                        android:text="金* 6228****9876"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:textSize="@dimen/small_text"
+                            android:background="@drawable/btn_billing_details"
+                            android:textColor="@color/textGrayColor"
+                            android:text="账单详情"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="@color/textGrayColor"
+                            android:text="金* 6228****9876"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
-</com.qiangu.ntd.view.widget.ObservableNestedScrollView>
+        </RelativeLayout>
+    </com.qiangu.ntd.view.widget.ObservableNestedScrollView>
+
+
+</RelativeLayout>

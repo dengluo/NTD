@@ -80,7 +80,10 @@
         <activity android:name=".ui.MessageActivity"/>
         <activity android:name=".ui.user.RegisteredActivity"/>
         <activity android:name=".ui.SearchActivity"/>
-
+        <activity android:name=".ui.user.SettingActivity"/>
+        <activity android:name=".ui.user.FeedbackActivity"/>
+        <activity android:name=".ui.WebActivity"/>
+        <activity android:name=".ui.financial.FinancialActivity"/>
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
             android:exported="true"

@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -29,11 +28,14 @@ import com.qiangu.ntd.app.AppStatusConstant;
 import com.qiangu.ntd.app.Constant;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.BaseFragment;
+import com.qiangu.ntd.base.utils.ActivityUtils;
 import com.qiangu.ntd.base.utils.ToastUtils;
 import com.qiangu.ntd.model.event.LoginEvent;
 import com.qiangu.ntd.ui.financial.FinancialFragment;
 import com.qiangu.ntd.ui.home.HomeFragment;
 import com.qiangu.ntd.ui.home.exchange.ExchangeFragment;
+import com.qiangu.ntd.ui.user.FeedbackActivity;
+import com.qiangu.ntd.ui.user.SettingActivity;
 import com.qiangu.ntd.view.dialog.SelectPicWayDialogFragment;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -389,13 +391,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-
     @OnClick({ R.id.ivUserHead, R.id.tvSetting, R.id.tvCustomerService,
                      R.id.tvAbout, R.id.tvFeedback })
     public void onViewClicked(View view) {
@@ -411,12 +406,16 @@ public class MainActivity extends BaseActivity {
                         "selectPicWayDialogFragment");
                 break;
             case R.id.tvSetting:
+                ActivityUtils.launchActivity(mContext, SettingActivity.class);
                 break;
             case R.id.tvCustomerService:
+                ActivityUtils.launchActivity(mContext,WebActivity.class,
+                        WebActivity.buildBundle("https://www.baidu.com/"));
                 break;
             case R.id.tvAbout:
                 break;
             case R.id.tvFeedback:
+                ActivityUtils.launchActivity(mContext, FeedbackActivity.class);
                 break;
         }
     }

@@ -2,6 +2,11 @@ package com.qiangu.ntd.ui.home;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -13,7 +18,9 @@ import com.qiangu.ntd.base.utils.ActivityUtils;
 import com.qiangu.ntd.ui.MainActivity;
 import com.qiangu.ntd.ui.MessageActivity;
 import com.qiangu.ntd.ui.SearchActivity;
+import com.qiangu.ntd.ui.WebActivity;
 import com.qiangu.ntd.ui.exchange.ExchangeActivity;
+import com.qiangu.ntd.ui.financial.FinancialActivity;
 import com.qiangu.ntd.ui.home.recharge.RechargeActivity;
 import com.qiangu.ntd.ui.home.transfer.TransferActivity;
 import com.qiangu.ntd.view.adapter.HomeBannerImageHolderView;
@@ -30,8 +37,14 @@ public class HomeFragment extends BaseFragment {
     List<String> mStrings = new ArrayList<>();
     @BindView(R.id.convenientBanner) ConvenientBanner mConvenientBanner;
     @BindView(R.id.tvBanner) TextBannerView mTvBanner;
+    @BindView(R.id.tvTips) TextView mTvTips;
+    @BindView(R.id.btnCheckBalances) Button mBtnCheckBalances;
+    @BindView(R.id.llBalance) LinearLayout mLlBalance;
+    @BindView(R.id.rlBalance) RelativeLayout mRlBalance;
 
     private List<String> mList;
+
+
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         Bundle bundle = new Bundle();
@@ -75,9 +88,8 @@ public class HomeFragment extends BaseFragment {
                          .setPageIndicatorAlign(
                                  ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
         mTvBanner.setItemOnClickListener(new ITextBannerItemClickListener() {
-            @Override
-            public void onItemClick(String data, int position) {
-                Toast.makeText(mContext, String.valueOf(position)+">>"+data,
+            @Override public void onItemClick(String data, int position) {
+                Toast.makeText(mContext, String.valueOf(position) + ">>" + data,
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -85,8 +97,9 @@ public class HomeFragment extends BaseFragment {
 
 
     @OnClick({ R.id.tvRecharge, R.id.tvTransfer, R.id.tvExchange,
-                     R.id.tvFinancial, R.id.ibtNavigation ,R.id.ibtMessage,
-                     R.id.tvSearch,R.id.btnCheckBalances})
+                     R.id.tvFinancial, R.id.ibtNavigation, R.id.ibtMessage,
+                     R.id.tvSearch, R.id.btnCheckBalances,
+                     R.id.ibtCustomerService })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvRecharge:
@@ -99,6 +112,7 @@ public class HomeFragment extends BaseFragment {
                 ActivityUtils.launchActivity(mContext, ExchangeActivity.class);
                 break;
             case R.id.tvFinancial:
+                ActivityUtils.launchActivity(mContext, FinancialActivity.class);
                 break;
             case R.id.ibtNavigation:
                 ((MainActivity) mContext).openLeftLayout();
@@ -110,25 +124,37 @@ public class HomeFragment extends BaseFragment {
                 ActivityUtils.launchActivity(mContext, SearchActivity.class);
                 break;
             case R.id.btnCheckBalances:
-                ActivityUtils.launchActivity(mContext, SearchActivity.class);
+                mBtnCheckBalances.setVisibility(View.GONE);
+                mLlBalance.setVisibility(View.VISIBLE);
+                mTvTips.setVisibility(View.GONE);
+                LinearLayout.LayoutParams params
+                        = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0, mContext.getResources()
+                                             .getDimensionPixelSize(
+                                                     R.dimen.dp_50), 0, 0);
+                mRlBalance.setLayoutParams(params);
+                break;
+
+            case R.id.ibtCustomerService:
+                ActivityUtils.launchActivity(mContext, WebActivity.class,
+                        WebActivity.buildBundle("https://www.baidu.com/"));
                 break;
         }
     }
 
-    @Override
-    public void onResume() {
+
+    @Override public void onResume() {
         super.onResume();
         /**调用startViewAnimator()重新开始文字轮播*/
         mTvBanner.startViewAnimator();
-
-
     }
 
-    @Override
-    public void onStop() {
+
+    @Override public void onStop() {
         super.onStop();
         /**调用stopViewAnimator()暂停文字轮播，避免文字重影*/
         mTvBanner.stopViewAnimator();
     }
-
 }
