@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/xx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_toobarl"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:src="@drawable/ibt_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/White"
+            android:text="设置"/>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/scMessage"
+        android:padding="15dp"
+        android:background="@color/White"
+        style="@style/setting"
+        android:text="通知"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/textTitleColor"
+            android:text="绑定手机号"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/small_text"
+            android:textColor="#FFB400"
+            android:text="已绑定"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:gravity="center|left"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:textSize="@dimen/big_small_text"
+        android:textColor="@color/textTitleColor"
+        android:drawableRight="@drawable/ic_right_arrow"
+        android:text="修改登录密码"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:gravity="center|left"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:textSize="@dimen/big_small_text"
+        android:textColor="@color/textTitleColor"
+        android:drawableRight="@drawable/ic_right_arrow"
+        android:text="设置支付密码"/>
+    <Button
+        android:id="@+id/btnRegistered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="70dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/bg_send_code_normal"
+        android:text="安全退出"
+        android:textColor="@color/textContentColor2"
+        android:textSize="@dimen/big_small_text"/>
+</LinearLayout>

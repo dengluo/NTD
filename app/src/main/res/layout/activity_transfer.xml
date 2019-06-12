@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/xx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_toobarl"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:src="@drawable/ibt_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/White"
+            android:text="转账"/>
+
+        <Button
+            android:id="@+id/btnTransferRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_redemption_record_bg"
+            android:text="转账记录"
+            android:textColor="@color/White"
+            android:textSize="@dimen/small_text"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White"
+            android:paddingLeft="30dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/big_small_text"
+                android:textColor="@color/textTitleColor"
+                android:text="付款账户"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/medium_text"
+                    android:textColor="@color/textTitleColor"
+                    android:text="6228****9876"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/big_small_text"
+                    android:textColor="@color/textTitleColor"
+                    android:text="美金账户    35012.68"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="@dimen/big_small_text"
+                android:textColor="@color/textTitleColor"
+                android:text="收款户名"/>
+
+            <EditText
+                android:id="@+id/etCollectionName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:hint="请输入收款户名"
+                android:textColorHint="#ffb4b5c1"
+                android:background="@null"
+                android:textColor="@color/textContentColor"
+                android:textSize="@dimen/small_text"
+                android:cursorVisible="true"
+                android:focusableInTouchMode="true"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="@dimen/big_small_text"
+                android:textColor="@color/textTitleColor"
+                android:text="收款账户"/>
+
+            <EditText
+                android:id="@+id/etAccountsReceivable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:hint="请输入收款账户"
+                android:textColorHint="#ffb4b5c1"
+                android:background="@null"
+                android:textColor="@color/textContentColor"
+                android:textSize="@dimen/small_text"
+                android:cursorVisible="true"
+                android:focusableInTouchMode="true"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@null"
+                android:src="@drawable/icon_camera"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="@dimen/big_small_text"
+                android:textColor="@color/textTitleColor"
+                android:text="收款账户"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="@dimen/big_small_text"
+                android:textColor="@color/textTitleColor"
+                android:text="实时到账"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/textTitleColor"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="转账金额"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_usd"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/xxx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="$"/>
+
+                    <com.qiangu.ntd.view.widget.DecimalEditText
+                        android:id="@+id/etMoney"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/xxx"
+                        android:layout_weight="1"
+                        android:imeOptions="actionDone"
+                        android:digits="@string/money_input"
+                        android:textStyle="bold"
+                        android:hint="0.00"
+                        android:layout_marginLeft="10dp"
+                        android:focusable="true"
+                        android:textColorHint="#BEC1CA"
+                        android:background="@null"
+                        android:textColor="#212C67"
+                        android:textSize="38dp"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:maxLength="12"
+                        android:textCursorDrawable="@null"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/etMoney"
+                        android:textSize="@dimen/big_small_text"
+                        android:textColor="@color/textTitleColor"
+                        android:text="免手续费"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#21335B"
+                    android:layout_marginTop="3dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/big_small_text"
+        android:textColor="@color/textTitleColor"
+        android:gravity="center|bottom"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="转账附言"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/btn_transfer_next"
+        android:text="下一步"
+        android:textColor="@color/White"
+        android:textSize="@dimen/big_small_text"/>
+</LinearLayout>

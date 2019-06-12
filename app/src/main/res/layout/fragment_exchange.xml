@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.qiangu.ntd.view.widget.ObservableNestedScrollView
+        android:id="@id/swipe_target"
+        style="@style/MyScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_head"/>
+
+                <LinearLayout
+                    android:id="@+id/xx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|top"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/ibtBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:background="@null"
+                            android:src="@drawable/ibt_back"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/big_small_text"
+                            android:textColor="@color/White"
+                            android:text="NTD兑换美金"/>
+
+                        <Button
+                            android:id="@+id/btnExchangeRecord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_redemption_record_bg"
+                            android:text="兑换记录"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/small_text"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:shadowColor="#1a27347d"
+                        android:shadowDx="0"
+                        android:shadowDy="4"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp"
+                        android:background="@drawable/bg_conversion_ratio"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/big_small_text"
+                            android:textColor="#212C67"
+                            android:text="实时兑换比例"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textSize="@dimen/big_small_text"
+                            android:textColor="#212C67"
+                            android:textStyle="bold"
+                            android:text="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:drawableLeft="@drawable/img_ntd_select"
+                            android:textSize="@dimen/medium_text"
+                            android:textColor="#212C67"
+                            android:textStyle="bold"
+                            android:text="="/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:drawablePadding="5dp"
+                            android:drawableRight="@drawable/img_usd"
+                            android:textSize="@dimen/medium_text"
+                            android:textColor="#FFAA00"
+                            android:textStyle="bold"
+                            android:text="2.03"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="@dimen/small_text"
+                android:textColor="#212C67"
+                android:text="兑换数量"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_ntd_select"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/xxx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/small_text"
+                            android:textColor="#212C67"
+                            android:text="N"/>
+
+                        <com.qiangu.ntd.view.widget.DecimalEditText
+                            android:id="@+id/etMoney"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/xxx"
+                            android:layout_weight="1"
+                            android:imeOptions="actionDone"
+                            android:digits="@string/money_input"
+                            android:hint="0.00"
+                            android:layout_marginLeft="10dp"
+                            android:focusable="true"
+                            android:textColorHint="#BEC1CA"
+                            android:background="@null"
+                            android:textColor="#212C67"
+                            android:textSize="38dp"
+                            android:cursorVisible="true"
+                            android:focusableInTouchMode="true"
+                            android:singleLine="true"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:maxLength="12"
+                            android:textCursorDrawable="@null"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#21335B"
+                        android:layout_marginTop="3dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="@color/Black"
+                    android:text="可用NDT数量：871"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="#919191"
+                    android:text="≈1768.13美金"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="#919191"
+                    android:text="可获得美金数量"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="#919191"
+                    android:text="170.99"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnConfirmExchange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="70dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:background="@drawable/btn_confirm_exchange_bg"
+                android:text="确认兑换"
+                android:textColor="@color/White"
+                android:textSize="@dimen/big_small_text"/>
+        </LinearLayout>
+    </com.qiangu.ntd.view.widget.ObservableNestedScrollView>
+
+</LinearLayout>

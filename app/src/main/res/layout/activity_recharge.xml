@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.qiangu.ntd.view.widget.ObservableNestedScrollView
+        android:id="@id/swipe_target"
+        style="@style/MyScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/xxx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_head"/>
+
+            <LinearLayout
+                android:id="@+id/xx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center|top"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/ibtBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="15dp"
+                        android:background="@null"
+                        android:src="@drawable/ibt_back"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/big_small_text"
+                        android:textColor="@color/White"
+                        android:text="NTD充币"/>
+
+                    <Button
+                        android:id="@+id/btnRedemptionRecord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/btn_redemption_record_bg"
+                        android:text="充值记录"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/small_text"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/bg_blurry"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:shadowColor="#1a27347d"
+                        android:shadowDx="0"
+                        android:shadowDy="4"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp"
+                        android:background="@drawable/bg_bank_card"
+                        android:gravity="center"
+                        android:textSize="@dimen/big_small_text"
+                        android:textColor="#212C68"
+                        android:text="币种：NTD"/>
+
+                    <ImageView
+                        android:id="@+id/ivQrCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/img_qrcode_frame"
+                        android:padding="11dp"
+                        android:src="@color/Black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="#212C67"
+                        android:text="充币地址:"/>
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/big_small_text"
+                        android:textColor="#212C67"
+                        android:text="1FWnadtearDOI9283yw56sayakdpqe0H"/>
+
+                    <Button
+                        android:id="@+id/btnCopyAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="70dp"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginBottom="50dp"
+                        android:layout_marginTop="30dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@drawable/btn_copy_address_bg"
+                        android:text="复制地址"
+                        android:textColor="#ff212c67"
+                        android:textSize="@dimen/big_small_text"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="70dp"
+                android:layout_marginTop="40dp"
+                android:layout_below="@+id/xx"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/big_small_text"
+                    android:textColor="#212C67"
+                    android:text="注意事项"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/bg_point"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="请勿向上述地址从之人和非NTD资产，否则资产将不可找回。"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/bg_point"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="您充值至上述地址后，需要整个网络节点的确认，1次确认后到账，3次网络确认后可提币。"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/bg_point"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="最小充值金额：1NTD，小于最小充值金额将不会上账且无法退回。"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/bg_point"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="您的充值地址不会经常改变，可以重复充值。"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/bg_point"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="#212C67"
+                        android:text="请务必确认电脑及浏览器安全，防止信息被篡改或泄漏。"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.qiangu.ntd.view.widget.ObservableNestedScrollView>
+
+</LinearLayout>

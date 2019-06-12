@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/xx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_toobarl"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:src="@drawable/ibt_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/White"
+            android:text="反馈建议"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:paddingRight="10dp"
+        android:paddingLeft="20dp"
+        android:lines="9"
+        android:gravity="top|left"
+        android:maxLength="50"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:hint="请输入您的反馈建议"
+        android:textColorHint="#ffb4b5c1"
+        android:background="@drawable/bg_dialog"
+        android:textColor="@color/textContentColor"
+        android:textSize="@dimen/small_text"
+        android:focusableInTouchMode="true"
+        android:textCursorDrawable="@null"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="70dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/bg_confirm_exchange_selected"
+        android:text="提交"
+        android:textColor="@color/White"
+        android:textSize="@dimen/big_small_text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:gravity="center|bottom"
+        android:textSize="@dimen/small_text"
+        android:textColor="#BDBBC8"
+        android:drawableRight="@drawable/ic_right_arrow"
+        android:text="您的宝贵意见有助于我们为您提供更优质的服务\n - 万分感谢您提出的意见 -"/>
+
+</LinearLayout>

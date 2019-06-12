@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="20dp"
+        android:background="@color/White"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/left_line1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/status_suspend"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/big_small_text"
+                    android:textColor="#212C67"
+                    android:text="充值到账通知"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:gravity="center|right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="#A4A5B3"
+                    android:text="今天 16:00"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/small_text"
+                android:textColor="@color/textGrayColor"
+                android:text="您的充值已到账，可在余额中查看。"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_head"/>
+
+        <ImageButton
+            android:id="@+id/ibtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:src="@drawable/ibt_back"/>
+
+        <TextView
+            android:id="@+id/xxxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ibtBack"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="50dp"
+            android:textColor="@color/White"
+            android:text="欢迎回来～"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-32dp"
+            android:layout_below="@+id/xxxx"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            android:textSize="60dp"
+            android:textColor="@color/White"
+            android:text="Welcom"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:focusable="true"
+        android:paddingBottom="20dp"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:hint="请输入卡号"
+        android:textColorHint="#ffb4b5c1"
+        android:background="@null"
+        android:textColor="@color/textContentColor"
+        android:textSize="@dimen/small_text"
+        android:cursorVisible="true"
+        android:focusableInTouchMode="true"
+        android:inputType="number"
+        android:maxLength="14"
+        android:maxLines="1"
+        android:textCursorDrawable="@null"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:background="#D9DAEB"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:paddingBottom="20dp"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:hint="请输入登录密码"
+        android:textColorHint="#ffb4b5c1"
+        android:background="@null"
+        android:textColor="@color/textContentColor"
+        android:textSize="@dimen/small_text"
+        android:cursorVisible="true"
+        android:focusableInTouchMode="true"
+        android:inputType="numberPassword"
+        android:maxLength="11"
+        android:maxLines="1"
+        android:textCursorDrawable="@null"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:background="#D9DAEB"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:enabled="false"
+        android:background="@drawable/btn_login_bg"
+        android:text="登 录"
+        android:textColor="@color/White"
+        android:textSize="@dimen/big_small_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:gravity="center|top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text"
+            android:textColor="#919191"
+            android:text="没有账号，点击"/>
+
+        <TextView
+            android:id="@+id/tvRegistered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text"
+            android:textColor="#27347D"
+            android:text="注册"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/cb_protocol"
+            android:textColor="#A4A5B3"
+            android:button="@null"
+            android:checked="true"
+            android:text="已同意"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text"
+            android:textColor="#FFAA00"
+            android:text="《NTD服务协议》"/>
+
+        <TextView
+            android:id="@+id/tvForgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:textSize="@dimen/small_text"
+            android:textColor="#ff27347d"
+            android:text="忘记密码"/>
+    </LinearLayout>
+</LinearLayout>

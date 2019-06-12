@@ -1,0 +1,200 @@
+apply plugin: 'com.android.application' // module 类型 appllication -> app library -> 代表android library 或者 java library
+//apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.butterknife'
+
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+configurations.all {
+
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.0"
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    // 签名配置
+    signingConfigs {
+//        debug {
+//            keyAlias 'wallet'
+//            keyPassword '753951tempuswallet'
+//        storeFile file('tempuswallet.jks')
+//            storePassword 'tempuswallet753951'
+//        }
+//        ntd {
+//            keyAlias 'wallet'
+//            keyPassword '753951tempuswallet'
+//            storeFile file('tempuswallet.jks')
+//            storePassword 'tempuswallet753951'
+//            //v2SigningEnabled false
+//        }
+        //        defaultConfig {
+        //            multiDexEnabled true
+        //            multiDexKeepProguard file('multiDexKeep.pro')
+        //            multiDexKeepFile file('multiDexKeep.txt')
+        //        }
+        defaultConfig {
+            renderscriptTargetApi 25
+            //must match target sdk and build tools, 23+
+            renderscriptSupportModeEnabled true
+
+        }
+    }
+//    implementationSdkVersion 28 //SDK编译版本
+//    buildToolsVersion '29.0.0' //构建工具版本 对应buildTool
+
+    defaultConfig {
+        applicationId 'com.qiangu.ntd' //配置包名
+        minSdkVersion 18 // 最小支持sdk版本
+        targetSdkVersion 28 // 目标sdk版本
+        versionCode 1 //版本号
+        versionName "1.0" //版本名称
+        flavorDimensions "versionCode"
+        // dex突破65535的限制
+        multiDexEnabled true
+        //默认是umeng的渠道
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", 'arm64-v8a', "x86", "mips"
+        }
+        vectorDrawables.useSupportLibrary = true
+    }
+    // 这个是解决lint报错的代码
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    //    dexOptions {
+    //        incremental true
+    //        javaMaxHeapSize "4g"
+    //        //关闭预编译
+    //        preDexLibraries = false
+    //    } Studio 2.2不需要dex配置
+    //打包忽略掉第三方jar相同的文件
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        //表示构建类型 一般有release debug 两种
+        debug {
+            //显示log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            versionNameSuffix "-debug"
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            //release类型
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //是否使用混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            // 启用混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+            //signingConfig signingConfigs.ntd
+        }
+    }
+//    productFlavors {
+//        //多渠道打包
+//        ntd {
+//        }
+//    }
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs' //this way we can find the .aar file in libs folder
+        }
+    }
+}
+android {
+    //use legacy for android 6.0
+    useLibrary 'org.apache.http.legacy'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //网络请求
+    //SwipeToLoadLayout
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    //ConvenientBanner
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    implementation 'com.jaeger.statusbaruitl:library:1.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    implementation 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'me.yokeyword:fragmentation:1.3.7'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
+    implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+    implementation 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
+    implementation 'com.bigkoo:convenientbanner:2.0.5'
+    implementation 'com.zhy:percent-support-extends:1.1.1'
+    implementation 'com.camnter.easyrecyclerview:easyrecyclerview:1.3'
+    //     implementation 'com.github.chrisbanes.photoview:library:1.2.4'
+    implementation 'cn.finalteam.rxgalleryfinal:library:1.1.3'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.github.zyyoona7:EasyPopup:1.0.2'
+    //    implementation 'com.ziyeyouhu:customizekeyboard:1.0.0'
+    implementation 'com.robinhood.ticker:ticker:1.2.1'
+    //ConvenientBanner
+    implementation 'com.google.android:flexbox:0.3.2'
+    //implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.superluo:textbannerview:1.0.5'
+    //android-drag-FowLayout
+    implementation 'com.heaven7.android.dragflowlayout:dragflowlayout:1.8.8'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+}

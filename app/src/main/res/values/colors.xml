@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#212C67</color>
+    <color name="colorPrimaryDark">#212C67</color>
+    <color name="colorAccent">#212C67</color>
+    <color name="bg">#F9F9FC</color>
+
+    <color name="textTitleColor">#212C67</color>
+    <color name="textContentColor">#1E2E47</color>
+    <color name="textContentColor1">#919191</color>
+    <color name="textContentColor2">#B4B5C1</color>
+    <color name="textContentColor3">#FFAA00</color>
+
+    <color name="textGrayColor">#A4A5B3</color>
+    <color name="White">#fff</color>
+    <color name="Black">#000000</color>
+
+    <color name="cpb_default_color">#33b5e5</color>
+    <dimen name="cpb_default_stroke_width">4dp</dimen>
+    <integer name="cpb_default_min_sweep_angle">20</integer>
+    <integer name="cpb_default_max_sweep_angle">300</integer>
+    <item name="cpb_default_sweep_speed"
+        format="float"
+        type="string">1
+    </item>
+    <item name="cpb_default_rotation_speed"
+        format="float"
+        type="string">1
+    </item>
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="line1">#d5d5d5</color>
+    <color name="line">#D9DAEB</color>
+    <color name="textIncomeColor">#31CA50</color>
+    <color name="textExpenditureColor">#FD4859</color>
+
+</resources>
