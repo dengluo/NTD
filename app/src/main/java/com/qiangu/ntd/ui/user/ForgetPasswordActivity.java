@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.LoginTimeCount;
@@ -42,6 +43,9 @@ public class ForgetPasswordActivity extends BaseActivity {
         //mEtCardNumber.addTextChangedListener(new EditCodeChangedListener());
         mLoginTimeCount = new LoginTimeCount(60000, 1000, mBtnSendCode,
                 mContext);//构造CountDownTimer对象
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                ForgetPasswordActivity.this, 0,
+                null);
     }
 
 

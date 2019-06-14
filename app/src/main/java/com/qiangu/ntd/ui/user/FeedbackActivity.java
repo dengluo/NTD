@@ -3,6 +3,7 @@ package com.qiangu.ntd.ui.user;
 import android.os.Bundle;
 import android.view.View;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 
@@ -26,7 +27,9 @@ public class FeedbackActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
-
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                FeedbackActivity.this, 0,
+                null);
     }
 
 

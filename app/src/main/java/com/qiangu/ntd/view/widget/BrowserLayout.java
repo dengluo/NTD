@@ -16,16 +16,21 @@
 
 package com.qiangu.ntd.view.widget;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
-import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.JsPromptResult;
@@ -44,8 +49,10 @@ import androidx.appcompat.app.AlertDialog;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.app.AppContext;
 import com.qiangu.ntd.base.BaseActivity;
+import com.qiangu.ntd.base.utils.FileUtils;
 import com.qiangu.ntd.base.utils.js.HostJsScope;
 import com.qiangu.ntd.base.utils.js.InjectedChromeClient;
+import java.io.File;
 
 /**
  * @author jianhao025@gmail.com
@@ -66,6 +73,12 @@ public class BrowserLayout extends LinearLayout {
 
     public boolean loadError = false;
     public LinearLayout errorBtn;
+
+    private ValueCallback<Uri> mUploadMessage;
+    private ValueCallback<Uri[]> mUploadCallbackAboveL;
+    private final int RESULT_CODE_PICK_FROM_ALBUM_BELLOW_LOLLILOP = 1;
+    private final int RESULT_CODE_PICK_FROM_ALBUM_ABOVE_LOLLILOP = 2;
+    String compressPath = "";
 
 
     public BrowserLayout(Context context) {
@@ -109,10 +122,13 @@ public class BrowserLayout extends LinearLayout {
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
         mWebView.setScrollbarFadingEnabled(true);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            //mWebView.getSettings().setMixedContentMode(WebSettings
-            // .LOAD_NORMAL);
-        }
+
+        mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);//开启硬件加速
+        //if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+        //    mWebView.getSettings()
+        //            .setMixedContentMode(
+        //                    WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        //}
         mWebView.getSettings().setBlockNetworkImage(false);
         this.mWebView.requestFocusFromTouch();//支持获取手势焦点，输入用户名、密码或其他
         this.mWebView.getSettings().setDomStorageEnabled(true);
@@ -144,6 +160,7 @@ public class BrowserLayout extends LinearLayout {
         this.mWebView.getSettings().setAppCacheMaxSize(Long.MAX_VALUE);
         this.mWebView.getSettings()
                      .setRenderPriority(WebSettings.RenderPriority.HIGH);
+        this.mWebView.getSettings().setAllowContentAccess(true);
         LayoutParams lps = new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1);
         addView(mWebView, lps);
 
@@ -156,10 +173,8 @@ public class BrowserLayout extends LinearLayout {
             if (AppContext.isNetworkAvailable()) {
                 loadError = false;
                 webParentView.removeAllViews(); //移除加载网页错误时，默认的提示信息
-                LayoutParams layoutParams
-                        = new LayoutParams(
-                        LayoutParams.MATCH_PARENT,
-                        LayoutParams.MATCH_PARENT);
+                LayoutParams layoutParams = new LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
                 webParentView.setOrientation(VERTICAL);
                 webParentView.addView(mProgressBar, LayoutParams.MATCH_PARENT,
                         (int) TypedValue.applyDimension(
@@ -173,7 +188,7 @@ public class BrowserLayout extends LinearLayout {
                 mWebView.loadUrl(mLoadUrl);
                 mWebView.clearHistory();
                 mWebView.setWebChromeClient(
-                        new ChromeClient("wallet", HostJsScope.class, context));
+                        new ChromeClient("ntd", HostJsScope.class, context));
                 mWebView.setWebViewClient(webViewClient);
             }
         });
@@ -233,7 +248,9 @@ public class BrowserLayout extends LinearLayout {
                         webResourceError);
                 mLoadUrl = view.getUrl();
                 //6.0以上执行
-                Log.d("result", "6.0以上执行网络加载错误");
+                Log.d("result", "6.0以上执行网络加载错误" + "onReceivedError: " +
+                        "------->errorCode" + webResourceError.getErrorCode() +
+                        ":" + webResourceError.getDescription());
                 loadError = true;
                 //网络未连接
                 showErrorPage();
@@ -260,8 +277,6 @@ public class BrowserLayout extends LinearLayout {
         mWebView.setWebChromeClient(
                 new ChromeClient("ntd", HostJsScope.class, context));
         mWebView.setWebViewClient(webViewClient);
-
-
     }
 
 
@@ -270,8 +285,7 @@ public class BrowserLayout extends LinearLayout {
      */
     private void showErrorPage() {
         webParentView.removeAllViews(); //移除加载网页错误时，默认的提示信息
-        LayoutParams layoutParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT,
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
         webParentView.addView(mErrorView, 0, layoutParams); //添加自定义的错误提示的View
     }
@@ -281,8 +295,9 @@ public class BrowserLayout extends LinearLayout {
         mWebView.loadUrl(url);
     }
 
+
     public void loadDataWithBaseURL(String var1, String var2, String var3, String var4, String var5) {
-        mWebView.loadDataWithBaseURL(var1,var2,var3,var4,var5);
+        mWebView.loadDataWithBaseURL(var1, var2, var3, var4, var5);
     }
 
 
@@ -291,18 +306,85 @@ public class BrowserLayout extends LinearLayout {
     }
 
 
-    public ValueCallback<Uri> uploadMessage;
-    public ValueCallback<Uri[]> uploadMessageAboveL;
-    public final static int FILE_CHOOSER_RESULT_CODE = 10000;
+    /**
+     * 选择照片后结束
+     */
+    public Uri afterChosePic(Intent data) {
+        if (data == null) {
+            return null;
+        }
+        String path = getRealFilePath(data.getData());
+        String[] names = path.split("\\.");
+        String endName = null;
+        if (names != null) {
+            endName = names[names.length - 1];
+        }
+        if (endName != null) {
+            compressPath = compressPath.split("\\.")[0] + "." + endName;
+        }
+        File newFile;
+        try {
+            newFile = FileUtils.compressFile(path, compressPath);
+        } catch (Exception e) {
+            newFile = null;
+        }
+        return Uri.fromFile(newFile);
+    }
 
 
-    private void openImageChooserActivity() {
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("image/*");
-        ((BaseActivity) getContext()).startActivityForResult(
-                Intent.createChooser(i, "Image " + "Chooser"),
-                FILE_CHOOSER_RESULT_CODE);
+    /**
+     * 根据Uri获取图片文件的绝对路径
+     */
+    public String getRealFilePath(final Uri uri) {
+        if (null == uri) {
+            return null;
+        }
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null) {
+            data = uri.getPath();
+        }
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        }
+        else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = mContext.getContentResolver()
+                                    .query(uri, new String[] {
+                                                    MediaStore.Images.ImageColumns.DATA },
+                                            null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndexOrThrow(
+                            MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+
+
+    /**
+     * 打开图库,同时处理图片（项目业务需要统一命名）
+     */
+    private void selectImage(int resultCode) {
+        compressPath = Environment.getExternalStorageDirectory().getPath() +
+                "/temp";
+        File file = new File(compressPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        compressPath = compressPath + File.separator + "compress.png";
+        File image = new File(compressPath);
+        if (image.exists()) {
+            image.delete();
+        }
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        ((BaseActivity) mContext).startActivityForResult(intent, resultCode);
     }
 
 
@@ -355,18 +437,30 @@ public class BrowserLayout extends LinearLayout {
         }
 
 
-        //For Android  >= 4.1
-        public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
-            uploadMessage = valueCallback;
-            openImageChooserActivity();
+        // For Android 3.0+
+        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+            if (mUploadMessage != null) return;
+            mUploadMessage = uploadMsg;
+            selectImage(RESULT_CODE_PICK_FROM_ALBUM_BELLOW_LOLLILOP);
         }
 
 
-        // For Android >= 5.0
-        @Override
-        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
-            uploadMessageAboveL = filePathCallback;
-            openImageChooserActivity();
+        // For Android < 3.0
+        public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+            openFileChooser(uploadMsg, "");
+        }
+
+
+        // For Android > 4.1.1
+        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+            openFileChooser(uploadMsg, acceptType);
+        }
+
+
+        // For Android 5.0+
+        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+            mUploadCallbackAboveL = filePathCallback;
+            selectImage(RESULT_CODE_PICK_FROM_ALBUM_ABOVE_LOLLILOP);
             return true;
         }
 
@@ -386,7 +480,6 @@ public class BrowserLayout extends LinearLayout {
             //判断标题 title 中是否包含有“error”字段，如果包含“error”字段，则设置加载失败，显示加载失败的视图
             if (!TextUtils.isEmpty(title) &&
                     title.toLowerCase().contains("error")) {
-                Log.d("result", "error--------------------");
                 loadError = true;
             }
             if (TextUtils.isEmpty(mTitle) && !TextUtils.isEmpty(title)) {
@@ -403,5 +496,49 @@ public class BrowserLayout extends LinearLayout {
             //    showErrorPage();
             //}
         }
+    }
+
+
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+        if (mUploadMessage == null && mUploadCallbackAboveL == null) {
+            return;
+        }
+        Uri uri = null;
+        switch (requestCode) {
+            case RESULT_CODE_PICK_FROM_ALBUM_BELLOW_LOLLILOP:
+                uri = afterChosePic(data);
+                if (mUploadMessage != null) {
+                    mUploadMessage.onReceiveValue(uri);
+                    mUploadMessage = null;
+                }
+                break;
+            case RESULT_CODE_PICK_FROM_ALBUM_ABOVE_LOLLILOP:
+                try {
+                    uri = afterChosePic(data);
+                    if (uri == null) {
+                        mUploadCallbackAboveL.onReceiveValue(new Uri[] {});
+                        mUploadCallbackAboveL = null;
+                        break;
+                    }
+                    if (mUploadCallbackAboveL != null && uri != null) {
+                        mUploadCallbackAboveL.onReceiveValue(new Uri[] { uri });
+                        mUploadCallbackAboveL = null;
+                    }
+                } catch (Exception e) {
+                    mUploadCallbackAboveL = null;
+                    e.printStackTrace();
+                }
+                break;
+        }
+    }
+
+
+    //点击返回上一页面而不是退出浏览器
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+            mWebView.goBack();
+            return true;
+        }
+        return false;
     }
 }

@@ -1,10 +1,15 @@
 package com.qiangu.ntd.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.app.AppContext;
 import com.qiangu.ntd.base.BaseActivity;
@@ -62,6 +67,9 @@ public class WebActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                WebActivity.this, 0,
+                null);
         if (!AppContext.isNetworkAvailable()) {
             toggleShowError(true, "", v -> showErrorLayout());
         }
@@ -110,6 +118,7 @@ public class WebActivity extends BaseActivity {
 
     }
 
+
     @OnClick({ R.id.ibtBack }) public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtBack:
@@ -118,4 +127,32 @@ public class WebActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * 选择后，回传值
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("result", requestCode + "啊" + resultCode);
+        mBrowserLayout.onActivityResult(this, requestCode, resultCode, data);
+    }
+
+
+    protected void onDestroy() {
+        if (mBrowserLayout.getWebView() != null) {
+            ((ViewGroup) mBrowserLayout.getWebView().getParent()).removeView(
+                    mBrowserLayout.getWebView());
+            mBrowserLayout.getWebView().destroy();
+            //mBrowserLayout.getWebView() = null;
+        }
+        super.onDestroy();
+    }
+
+
+    //点击返回上一页面而不是退出浏览器
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+        mBrowserLayout.onKeyDown(keyCode, event);
+        return super.onKeyDown(keyCode, event);
+    }
 }

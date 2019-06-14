@@ -93,4 +93,11 @@
         <item name="android:textSize">@dimen/big_small_text</item>
         <item name="android:textColor">@color/textTitleColor</item>
     </style>
+
+    <style name="AppTheme.Launcher"
+        parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <!--<item name="android:windowBackground">@drawable/start</item>-->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

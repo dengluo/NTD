@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.view.adapter.HistorySearchAdapter;
@@ -44,6 +45,9 @@ public class SearchActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                SearchActivity.this, 0,
+                null);
         mList = new ArrayList<>();
         mList.add("学好Java");
         mList.add("走遍天");

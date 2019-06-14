@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.ActivityUtils;
@@ -34,7 +35,9 @@ public class TransferActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
-
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                TransferActivity.this, 0,
+                null);
     }
 
 

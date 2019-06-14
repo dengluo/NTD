@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    android:fitsSystemWindows="true"
+
     android:orientation="vertical">
 
     <ImageView
@@ -13,10 +13,11 @@
         android:src="@drawable/bg_head"/>
 
     <RelativeLayout
+        android:id="@+id/xxx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -37,74 +38,117 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/llBalance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:shadowColor="#1a27347d"
-        android:shadowDx="0"
-        android:shadowDy="4"
-        android:padding="20dp"
-        android:background="@drawable/bg_blurry"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/img_ntd_select"
-            android:textSize="@dimen/micro_text"
-            android:textColor="#212C67"
-            android:text="6228****9876"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="top"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/xx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/micro_text"
-                android:textColor="#212C67"
-                android:text="$"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/xx"
-                android:textSize="32dp"
-                android:textColor="#212C67"
-                android:text="35012.68"/>
-        </RelativeLayout>
+        android:orientation="vertical"
+        android:layout_below="@+id/xxx"
+        android:layout_marginTop="70dp">
 
         <LinearLayout
+            android:id="@+id/llBalance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="20dp"
+            android:background="@drawable/bg_platinum_card"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textSize="@dimen/micro_text"
-                android:textColor="@color/textGrayColor"
-                android:text="2019/05/18 16:56"/>
+                android:textColor="#212C67"
+                android:text="6228****9876"/>
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/big_large_text"
-                android:textColor="#212C67"
-                android:text="NTD 817"/>
+                android:layout_marginTop="15dp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/xx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/micro_text"
+                    android:textColor="#212C67"
+                    android:text="$"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/xx"
+                    android:textSize="32dp"
+                    android:textColor="#212C67"
+                    android:text="35012.68"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/micro_text"
+                    android:textColor="@color/textGrayColor"
+                    android:text="2019/05/18 16:56"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/big_large_text"
+                    android:textColor="#212C67"
+                    android:text="NTD 817"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textSize="@dimen/big_small_text"
+            android:textColor="@color/textTitleColor"
+            android:text="NTD GOLD MAGIC"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/textTitleColor"
+            android:text="NTD环球白金卡"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/small_text"
+            android:textColor="#BDBBC8"
+            android:text="NTD环球金卡GOLD MAGIC V1.2.1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:textSize="@dimen/small_text"
+            android:textColor="#8D90A2"
+            android:text="NTD环球白金卡集定活期、多储种、多币种、多功能于一卡，除可在招商银行网点、自助银行、电话银行、网上银行、手机银行以及掌上银行进行综合理财服务外，同时可在境内外贴有“银联”、“VISA” 或“MasterCard”标识的特约商户刷卡消费、自动柜员机提取现金。"/>
     </LinearLayout>
 
 </RelativeLayout>

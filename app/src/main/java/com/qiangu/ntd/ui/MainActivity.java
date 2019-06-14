@@ -34,14 +34,17 @@ import com.qiangu.ntd.model.event.LoginEvent;
 import com.qiangu.ntd.ui.financial.FinancialFragment;
 import com.qiangu.ntd.ui.home.HomeFragment;
 import com.qiangu.ntd.ui.home.exchange.ExchangeFragment;
+import com.qiangu.ntd.ui.user.AboutActivity;
 import com.qiangu.ntd.ui.user.FeedbackActivity;
+import com.qiangu.ntd.ui.user.LoginActivity;
 import com.qiangu.ntd.ui.user.SettingActivity;
 import com.qiangu.ntd.view.dialog.SelectPicWayDialogFragment;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 public class MainActivity extends BaseActivity {
     private static long DOUBLE_CLICK_TIME = 0L;
-    @BindView(R.id.btn_home) Button mBtnHome;
+    public @BindView(R.id.btn_home) Button mBtnHome;
     @BindView(R.id.btn_financial) Button mBtnFinancial;
     @BindView(R.id.btn_exchange) Button mBtnExchange;
     public HomeFragment mHomeFragment;
@@ -76,7 +79,7 @@ public class MainActivity extends BaseActivity {
 
 
     @Override protected View getLoadingTargetView() {
-        //return ButterKnife.findById(MainActivity.this, R.id.rlMain);
+        // return ButterKnife.findById(MainActivity.this, R.id.rlMain);
         return null;
     }
 
@@ -250,18 +253,28 @@ public class MainActivity extends BaseActivity {
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if ((System.currentTimeMillis() - DOUBLE_CLICK_TIME) > 2000) {
-                ToastUtils.showLongToast(R.string.double_click_exit);
-                DOUBLE_CLICK_TIME = System.currentTimeMillis();
+            if (index != 0) {
+                mBtnHome.performClick();
+            }
+            else if (mDrawerLayout.isDrawerOpen(mLlLeft)) {
+                mDrawerLayout.closeDrawer(mLlLeft);
             }
             else {
-                ((App) getApplication()).exitApp();
+                //moveTaskToBack(false);
+                if ((System.currentTimeMillis() - DOUBLE_CLICK_TIME) > 2000) {
+                    ToastUtils.showLongToast(
+                            getString(R.string.double_click_exit));
+                    //ToastUtils.showLongToast(
+                    //        getString(R.string.double_click_exit));
+                    DOUBLE_CLICK_TIME = System.currentTimeMillis();
+                }
+                else {
+                    ((App) getApplication()).exitApp();
+                }
             }
             return true;
         }
-        return super.
-
-                            onKeyDown(keyCode, event);
+        return super.onKeyDown(keyCode, event);
     }
 
 
@@ -396,10 +409,9 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivUserHead:
-                //ActivityUtils.launchActivity(mContext,
-                //       LoginActivity.class);
-              //  ChangeAvatar();
-               SelectPicWayDialogFragment selectPicWayDialogFragment
+                ActivityUtils.launchActivity(mContext, LoginActivity.class);
+                //  ChangeAvatar();
+                SelectPicWayDialogFragment selectPicWayDialogFragment
                         = SelectPicWayDialogFragment.newInstance("", "");
                 //设置目标Fragment
                 selectPicWayDialogFragment.show(getSupportFragmentManager(),
@@ -409,16 +421,18 @@ public class MainActivity extends BaseActivity {
                 ActivityUtils.launchActivity(mContext, SettingActivity.class);
                 break;
             case R.id.tvCustomerService:
-                ActivityUtils.launchActivity(mContext,WebActivity.class,
-                        WebActivity.buildBundle("https://www.baidu.com/"));
+                ActivityUtils.launchActivity(mContext, WebActivity.class,
+                        WebActivity.buildBundle(Constant.CUSTOMER_SERVICE_URL));
                 break;
             case R.id.tvAbout:
+                ActivityUtils.launchActivity(mContext, AboutActivity.class);
                 break;
             case R.id.tvFeedback:
                 ActivityUtils.launchActivity(mContext, FeedbackActivity.class);
                 break;
         }
     }
+
 
     private void ChangeAvatar() {
         RxGalleryFinalApi.getInstance(this)

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 
@@ -35,7 +36,9 @@ public class TransferRecordActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
-
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                TransferRecordActivity.this, 0,
+                null);
     }
 
 

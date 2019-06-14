@@ -10,9 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.ActivityUtils;
+import com.qiangu.ntd.base.utils.ToastUtils;
+import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
+import com.qiangu.ntd.model.event.LoginEvent;
+import com.qiangu.ntd.model.response.User;
+import org.greenrobot.eventbus.EventBus;
 
 public class LoginActivity extends BaseActivity {
 
@@ -42,6 +48,8 @@ public class LoginActivity extends BaseActivity {
     @Override protected void initView(Bundle savedInstanceState) {
         mEtCardNumber.addTextChangedListener(new EditCodeChangedListener());
         mEtPassword.addTextChangedListener(new EditCodeChangedListener());
+        StatusBarUtil.setTranslucentForImageViewInFragment(LoginActivity.this,
+                0, null);
     }
 
 
@@ -63,9 +71,11 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btnLogin:
+                login();
                 break;
             case R.id.tvRegistered:
-                ActivityUtils.launchActivity(mContext, RegisteredActivity.class);
+                ActivityUtils.launchActivity(mContext,
+                        RegisteredActivity.class);
                 break;
             case R.id.cbProtocol:
                 break;
@@ -129,5 +139,70 @@ public class LoginActivity extends BaseActivity {
             //        }
             //    }
         }
+    }
+
+
+    private void login() {
+        //String phone = mEtPhone.getText().toString().trim();
+        //if (TextUtils.isEmpty(phone) || phone.length() < 11) {
+        //    ToastUtils.showLongToast(R.string.phone_cannot_be_empty);
+        //    return;
+        //}
+        //if (TextUtils.isEmpty(verificationCode)) {
+        //    ToastUtils.showLongToast(
+        //            R.string.verification_code_cannot_be_empty);
+        //    return;
+        //}
+        //
+        //UserManager.getInstance()
+        //           .login(phone)
+        //           .compose(bindToLifecycle())
+        //           .
+        //                   subscribe(new CObserver<User>() {
+        //                       @Override public void onPrepare() {
+        //                           mProgressDialogUtils.showProgress(
+        //                                   R.string.loginIng);
+        //                       }
+        //
+        //
+        //                       @Override
+        //                       public void onError(ErrorThrowable throwable) {
+        //                           loginFailure(throwable);
+        //                       }
+        //
+        //
+        //                       @Override public void onSuccess(User user) {
+        //                           //setResult(RESULT_OK,
+        //                           //        new Intent().putExtra("user", user));
+        //                           loginSuccess(user);
+        //                       }
+        //                   });
+    }
+
+
+    private void loginSuccess(User user) {
+        //mIsLoginSuccess = true;
+        mProgressDialogUtils.hideProgress();
+        //runOnUiThread(() -> {
+        //    ToastUtils.showLongToast(R.string.loginSuccess);
+        //});
+        EventBus.getDefault().post(new LoginEvent());
+        finish();
+    }
+
+
+    @Override public void finish() {
+        //setResult(RESULT_OK,
+        //        new Intent().putExtra("isLoginSuccess", mIsLoginSuccess));
+        super.finish();
+    }
+
+
+    private void loginFailure(ErrorThrowable throwable) {
+
+        //setResult(RESULT_OK,
+        //        new Intent().putExtra("user", new Base(-1, msg, "")));
+        mProgressDialogUtils.hideProgress();
+        ToastUtils.showLongToast(throwable.errorMsg);
     }
 }

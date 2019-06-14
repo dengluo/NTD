@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.view.adapter.MessageAdapter;
@@ -35,6 +36,9 @@ public class MessageActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                MessageActivity.this, 0,
+                null);
         mList = new ArrayList<>();
         mList.add("学好Java、Android、C#、");
         mList.add("走遍天下都不怕！！！！！");

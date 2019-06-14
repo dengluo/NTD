@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <ImageView
@@ -18,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
         android:background="@null"
         android:src="@drawable/ibt_back"/>
 
@@ -39,6 +39,7 @@
         android:text="敬请期待"/>
 
     <TextView
+        android:id="@+id/tvCountDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -46,5 +47,5 @@
         android:layout_centerInParent="true"
         android:textSize="@dimen/small_text"
         android:textColor="#C6C7D0"
-        android:text="5s倒计时自动跳回..."/>
+        android:text=""/>
 </RelativeLayout>

@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.qiangu.ntd.R;
+import com.qiangu.ntd.app.Constant;
 import com.qiangu.ntd.base.BaseFragment;
 import com.qiangu.ntd.base.utils.ActivityUtils;
 import com.qiangu.ntd.ui.MainActivity;
@@ -139,7 +140,7 @@ public class HomeFragment extends BaseFragment {
 
             case R.id.ibtCustomerService:
                 ActivityUtils.launchActivity(mContext, WebActivity.class,
-                        WebActivity.buildBundle("https://www.baidu.com/"));
+                        WebActivity.buildBundle(Constant.CUSTOMER_SERVICE_URL));
                 break;
         }
     }

@@ -13,7 +13,7 @@ public class Constant {
 
     public static final String APPLICATION_ID = "com.tempus.wallet";
 
-    private static final boolean USE_REAL_SERVER =true;
+    private static final boolean USE_REAL_SERVER = true;
 
     private static final String SERVER_REAL
             = "https://tpurse.tempus.cn/tpurse/";//生产地址
@@ -105,4 +105,8 @@ public class Constant {
      * 扫描跳转Activity RequestCode
      */
     public static final int REQUEST_CODE = 111;
+    public static final String CUSTOMER_SERVICE_URL = "https://ssl.pop800" +
+            ".com/chat/510139";
+
+    //http://api.pop800.com/chat/512350
 }

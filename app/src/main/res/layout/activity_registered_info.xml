@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+
     android:orientation="vertical">
 
+
+
     <RelativeLayout
-        android:id="@+id/xx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:background="@drawable/bg_toobarl"
         android:orientation="horizontal">
 
@@ -17,8 +20,7 @@
             android:id="@+id/ibtBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             android:background="@null"
             android:src="@drawable/ibt_back"/>
@@ -26,14 +28,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
             android:layout_centerInParent="true"
-            android:layout_marginRight="20dp"
             android:textSize="@dimen/big_small_text"
             android:textColor="@color/White"
             android:text="注册账号"/>
+
     </RelativeLayout>
-
-
 
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="match_parent"

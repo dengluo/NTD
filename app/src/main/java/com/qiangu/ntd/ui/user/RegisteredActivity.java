@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.ActivityUtils;
@@ -43,6 +44,9 @@ public class RegisteredActivity extends BaseActivity {
 
 
     @Override protected void initView(Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageViewInFragment(
+                RegisteredActivity.this, 0,
+                null);
         mEtPhone.addTextChangedListener(new EditCodeChangedListener());
         mEtPassword.addTextChangedListener(new EditCodeChangedListener());
         mLoginTimeCount = new LoginTimeCount(60000, 1000, mBtnSendCode,
