@@ -113,7 +113,7 @@ public class DataManager {
                           //.retry(ResponseHandle.canRetry())
                           .compose(RxSchedulers.io_main());
     }
-
+//退出登录
     public static Observable<Base> loginOut( String token) {
         return RetrofitDao.getInstance()
                           .getApiService()

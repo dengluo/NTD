@@ -50,7 +50,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("userInfo/login") Observable<User> login(
             @Field("ntdNo") String ntdNo,  @Field("password") String password);
-    //退出登录
+    //用户退出登录
     @GET("userInfo/logout") Observable<Base> loginOut(
             @Query("token") String token);
 }
