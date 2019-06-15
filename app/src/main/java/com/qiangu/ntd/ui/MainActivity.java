@@ -30,7 +30,9 @@ import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.BaseFragment;
 import com.qiangu.ntd.base.utils.ActivityUtils;
 import com.qiangu.ntd.base.utils.ToastUtils;
+import com.qiangu.ntd.manager.UserManager;
 import com.qiangu.ntd.model.event.LoginEvent;
+import com.qiangu.ntd.model.response.User;
 import com.qiangu.ntd.ui.financial.FinancialFragment;
 import com.qiangu.ntd.ui.home.HomeFragment;
 import com.qiangu.ntd.ui.home.exchange.ExchangeFragment;
@@ -38,7 +40,6 @@ import com.qiangu.ntd.ui.user.AboutActivity;
 import com.qiangu.ntd.ui.user.FeedbackActivity;
 import com.qiangu.ntd.ui.user.LoginActivity;
 import com.qiangu.ntd.ui.user.SettingActivity;
-import com.qiangu.ntd.view.dialog.SelectPicWayDialogFragment;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity {
     //@BindView(R.id.ivLeft) ImageView mIvLeft;
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.llLeft) RelativeLayout mLlLeft;
+    private User mUser;
 
 
     @Override protected void getBundleExtras(Bundle extras) {
@@ -134,6 +136,10 @@ public class MainActivity extends BaseActivity {
         //else {
         //
         //}
+        mUser = UserManager.getInstance().getUser();
+        if (!UserManager.getInstance().isLogin()) {
+            mTvLogin.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -409,8 +415,11 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivUserHead:
-                ActivityUtils.launchActivity(mContext, LoginActivity.class);
-                //  ChangeAvatar();
+                if (!UserManager.getInstance().isLogin()) {
+                    ActivityUtils.launchActivity(mContext, LoginActivity.class);
+                    return;
+                }
+                ChangeAvatar();
                 //SelectPicWayDialogFragment selectPicWayDialogFragment
                 //        = SelectPicWayDialogFragment.newInstance("", "");
                 ////设置目标Fragment

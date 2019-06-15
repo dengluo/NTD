@@ -11,6 +11,13 @@ import android.view.WindowManager;
 import butterknife.OnClick;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseDialogFragment;
+import com.qiangu.ntd.base.utils.ToastUtils;
+import com.qiangu.ntd.dao.CObserver;
+import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
+import com.qiangu.ntd.manager.DataManager;
+import com.qiangu.ntd.manager.UserManager;
+import com.qiangu.ntd.model.response.Base;
+import com.qiangu.ntd.model.response.User;
 
 public class QuitDialogFragment extends BaseDialogFragment {
 
@@ -74,8 +81,38 @@ public class QuitDialogFragment extends BaseDialogFragment {
                 dismiss();
                 break;
             case R.id.btnConfirm:
-                dismiss();
+                loginOut();
                 break;
         }
+    }
+
+
+    private void loginOut() {
+        DataManager.getInstance()
+                   .loginOut(UserManager.getInstance().getUser().token)
+                   .compose(bindToLifecycle())
+                   .
+                           subscribe(new CObserver<Base>() {
+                               @Override public void onPrepare() {
+                                   mProgressDialogUtils.showProgress(
+                                           R.string.loginOutIng);
+                               }
+
+
+                               @Override
+                               public void onError(ErrorThrowable throwable) {
+                                   mProgressDialogUtils.hideProgress();
+                                   ToastUtils.showLongToast(throwable.msg);
+                                   dismiss();
+                               }
+
+
+                               @Override public void onSuccess(Base base) {
+                                   mProgressDialogUtils.hideProgress();
+                                   ToastUtils.showLongToast(
+                                           R.string.loginOutSuccess);
+                                   dismiss();
+                               }
+                           });
     }
 }

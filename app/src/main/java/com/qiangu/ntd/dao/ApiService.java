@@ -1,17 +1,16 @@
 package com.qiangu.ntd.dao;
 
 import com.qiangu.ntd.model.request.AppIdApplyRequest;
-import com.qiangu.ntd.model.request.LoginRequest;
 import com.qiangu.ntd.model.request.RefreshLoginRequest;
-import com.qiangu.ntd.model.request.RegistRequest;
 import com.qiangu.ntd.model.request.TokenApplyRequest;
-import com.qiangu.ntd.model.request.VerifyCodeRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
 import com.qiangu.ntd.model.response.AppInfo;
 import com.qiangu.ntd.model.response.Base;
 import com.qiangu.ntd.model.response.User;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -38,14 +37,20 @@ public interface ApiService {
     @GET("userInfo/getVerifyCode") Observable<Base> getVerifyCode(
             @Query("tel") String tel);
     //验证验证码
+    @FormUrlEncoded
     @POST("userInfo/verifyCode") Observable<Base> verifyCode(
-            @Body VerifyCodeRequest verifyCodeRequest);
+            @Field("tel") String tel, @Field("code") String code);
 
     //用户注册
+    @FormUrlEncoded
     @POST("userInfo/registUser") Observable<Base> registUser(
-            @Body RegistRequest registRequestr);
-
+            @Field("tel") String tel, @Field("ntdNo") String ntdNo,
+            @Field("password") String password, @Field("repPassword") String repPassword);
     //用户登录
+    @FormUrlEncoded
     @POST("userInfo/login") Observable<User> login(
-            @Body LoginRequest loginRequest);
+            @Field("ntdNo") String ntdNo,  @Field("password") String password);
+    //退出登录
+    @GET("userInfo/logout") Observable<Base> loginOut(
+            @Query("token") String token);
 }

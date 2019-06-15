@@ -1,11 +1,13 @@
 package com.qiangu.ntd.dao.retrofit;
 
+import android.text.TextUtils;
 import android.util.Log;
 import com.google.gson.GsonBuilder;
 import com.qiangu.ntd.base.utils.NetworkConfig;
 import com.qiangu.ntd.dao.ApiService;
 import com.qiangu.ntd.dao.retrofit.convert.MyGsonConverterFactory;
 import com.qiangu.ntd.dao.retrofit.convert.NullStringToEmptyAdapterFactory;
+import com.qiangu.ntd.manager.UserManager;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
@@ -71,7 +73,8 @@ public class RetrofitDao {
                                                              new HttpLoggingInterceptor()
                                                                      .setLevel(
                                                                              HttpLoggingInterceptor.Level.BODY))
-                                                     .retryOnConnectionFailure(true)
+                                                     .retryOnConnectionFailure(
+                                                             true)
                                                      .addInterceptor(
                                                              chain -> interceptResponse(
                                                                      chain))
@@ -92,8 +95,10 @@ public class RetrofitDao {
             //        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             //        .create();
             mRetrofit = new Retrofit.Builder().addConverterFactory(
-                    MyGsonConverterFactory.create(new GsonBuilder()
-                            .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create()))
+                    MyGsonConverterFactory.create(
+                            new GsonBuilder().registerTypeAdapterFactory(
+                                    new NullStringToEmptyAdapterFactory())
+                                             .create()))
                                               .addCallAdapterFactory(
                                                       RxJava2CallAdapterFactory.create())
                                               .client(okHttpClient)
@@ -117,29 +122,29 @@ public class RetrofitDao {
         //    RequestBody body = original.body();
         Request.Builder requestBuilder = original.newBuilder();
         //if (original.method().equals("GET")) {
-        //    Log.i("result", " GET");
-        //    HttpUrl url = original.url();
-        //    int size = url.querySize();
-        //    if (size > 0) {
-        //        TreeMap<String, Object> map = new TreeMap<>();
-        //        for (int i = 0; i < size; i++) {
-        //            String key = url.queryParameterName(i);
-        //            String value = url.queryParameterValue(i);
-        //            map.put(key, value);
-        //        }
-        //        url = url.newBuilder()
-        //                 .addQueryParameter("channel", "1")
-        //                 .addQueryParameter("localDateTime",
-        //                         AppContext.LOCAL_DATE_TIME)
-        //                 .addQueryParameter("userId",
-        //                         !getUserId().equals("") ? getUserId() : "")
-        //                 .addQueryParameter("stepCode", "1")
-        //                 .addQueryParameter("accessSource", "3")
-        //                 .addQueryParameter("version", Constant.INTER_VERSION)
-        //                 .build();
-        //        requestBuilder.url(url);
-        //        requestBuilder.method(original.method(), body);
-        //    }
+        //    //Log.i("result", " GET");
+        //    //HttpUrl url = original.url();
+        //    //int size = url.querySize();
+        //    //if (size > 0) {
+        //    //    TreeMap<String, Object> map = new TreeMap<>();
+        //    //    for (int i = 0; i < size; i++) {
+        //    //        String key = url.queryParameterName(i);
+        //    //        String value = url.queryParameterValue(i);
+        //    //        map.put(key, value);
+        //    //    }
+        //    //    url = url.newBuilder()
+        //    //             .addQueryParameter("channel", "1")
+        //    //             .addQueryParameter("localDateTime",
+        //    //                     AppContext.LOCAL_DATE_TIME)
+        //    //             .addQueryParameter("userId",
+        //    //                     !getUserId().equals("") ? getUserId() : "")
+        //    //             .addQueryParameter("stepCode", "1")
+        //    //             .addQueryParameter("accessSource", "3")
+        //    //             .addQueryParameter("version", Constant.INTER_VERSION)
+        //    //             .build();
+        //    //    requestBuilder.url(url);
+        //    //    requestBuilder.method(original.method(), body);
+        //    //}
         //}
         //else if (original.method().equals("POST")) {
         //    Log.i("result", " POST");
@@ -166,25 +171,23 @@ public class RetrofitDao {
         //        //if (info != null && !TextUtils.isEmpty(info.accessToken)) {
         //        //    newBody.add("accessToken", info.accessToken);
         //        //}
-        //        SessionContext sessionContext = new SessionContext();
-        //        sessionContext.channel = "1";
-        //        sessionContext.localDateTime = AppContext.LOCAL_DATE_TIME;
-        //        if (!TextUtils.isEmpty(getUserId())) {
-        //            sessionContext.userId = getUserId();
-        //        }
-        //        sessionContext.stepCode = "1";
-        //        sessionContext.accessSource = "3";
-        //        sessionContext.version = Constant.INTER_VERSION;
-        //        newBody.add("sessionContext",
-        //                new Gson().toJson(sessionContext));
+        //        newBody.add("token", UserManager.getInstance().getUser().token);
         //        requestBuilder.method(original.method(), newBody.build());
         //    }
         //}
-        Request request = requestBuilder.build();
+        Request request = requestBuilder.header("token",
+                (UserManager.getInstance().getUser() != null &&
+                        !TextUtils.isEmpty(
+                                UserManager.getInstance().getUser().token))
+                ? UserManager.getInstance().getUser().token
+                : "")
+                                        .addHeader("User-Agent", "android")
+                                        .
+                                                header("Content-Type",
+                                                        "text/html; charset=utf-8")
+                                        .build();
         Log.d(TAG, "url=" + request.url().toString());
         Response response = chain.proceed(request);
         return response;
     }
-
-
 }

@@ -47,6 +47,7 @@
                 android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:textColor="@color/textGrayColor"
                 android:layout_centerInParent="true"
                 android:textSize="@dimen/small_text"

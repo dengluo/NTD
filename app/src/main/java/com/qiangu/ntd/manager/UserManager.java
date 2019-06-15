@@ -56,15 +56,10 @@ public class UserManager {
 
 
     public void fillUser() {
-        // String userJson = SpUtil.getUserJson();
         User user = (User) mACache.getAsObject(Constant.KEY_USER);
         if (user != null) {
             this.mUser = user;
         }
-        //User user = (User) mACache.getAsObject(Constant.KEY_USER_INFO);
-        //if (user != null) {
-        //    this.mUser = user;
-        //}
     }
 
 

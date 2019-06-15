@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity {
 
 
         @Override public void afterTextChanged(Editable editable) {
-            if (mEtPassword.length() == 6) {//mEtCardNumber.length() == 14 &&
+            if ( mEtPassword.length() == 6) {//mEtCardNumber.length() == 20 &&
                 mBtnLogin.setEnabled(true);
             }
             else {
@@ -120,7 +120,7 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         String cardNumber = mEtCardNumber.getText().toString().trim();
-        if (TextUtils.isEmpty(cardNumber)) {//||  cardNumber.length() < 20
+        if (TextUtils.isEmpty(cardNumber) ) {//|| cardNumber.length() < 20
             ToastUtils.showLongToast(R.string.card_number_cannot_be_empty);
             return;
         }

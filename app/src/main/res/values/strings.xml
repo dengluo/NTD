@@ -34,6 +34,9 @@
     <string name="registerIng">注册中...</string>
     <string name="registerSuccess">注册成功!</string>
 
+    <string name="loginOutIng">退出登录中...</string>
+    <string name="loginOutSuccess">退出登录成功!</string>
+
     <string name="card_number_cannot_be_empty">请输入正确的卡号!</string>
     <string name="password_cannot_be_empty">请输入正确的密码!</string>
     <string name="confirm_cannot_be_empty">请输入正确的确认密码!</string>
