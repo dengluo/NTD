@@ -278,13 +278,26 @@
             android:textColor="#C6C7D0"
             android:text="兑换记录"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+            android:id="@+id/swipeToLoadLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:paddingTop="15dp"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!--<include-->
+            <!--android:id="@id/swipe_refresh_header"-->
+            <!--layout="@layout/layout_google_hook_header"/>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@id/swipe_target"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="15dp"/>
+
+            <include
+                android:id="@id/swipe_load_more_footer"
+                layout="@layout/layout_footer"/>
+        </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
     </LinearLayout>
 
 </RelativeLayout>

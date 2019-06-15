@@ -17,7 +17,6 @@ import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
 import com.qiangu.ntd.manager.DataManager;
 import com.qiangu.ntd.manager.UserManager;
 import com.qiangu.ntd.model.response.Base;
-import com.qiangu.ntd.model.response.User;
 
 public class QuitDialogFragment extends BaseDialogFragment {
 
@@ -76,9 +75,9 @@ public class QuitDialogFragment extends BaseDialogFragment {
 
     @OnClick({ R.id.btnCancel, R.id.btnConfirm })
     public void onViewClicked(View view) {
+        dismiss();
         switch (view.getId()) {
             case R.id.btnCancel:
-                dismiss();
                 break;
             case R.id.btnConfirm:
                 loginOut();
@@ -103,7 +102,7 @@ public class QuitDialogFragment extends BaseDialogFragment {
                                public void onError(ErrorThrowable throwable) {
                                    mProgressDialogUtils.hideProgress();
                                    ToastUtils.showLongToast(throwable.msg);
-                                   dismiss();
+
                                }
 
 
@@ -111,7 +110,7 @@ public class QuitDialogFragment extends BaseDialogFragment {
                                    mProgressDialogUtils.hideProgress();
                                    ToastUtils.showLongToast(
                                            R.string.loginOutSuccess);
-                                   dismiss();
+
                                }
                            });
     }

@@ -44,5 +44,10 @@
     <color name="line">#D9DAEB</color>
     <color name="textIncomeColor">#31CA50</color>
     <color name="textExpenditureColor">#FD4859</color>
+    <!-- google -->
+    <color name="google_blue">#4285F4</color>
+    <color name="google_green">#34A853</color>
+    <color name="google_yellow">#FBBC05</color>
+    <color name="google_red">#EA4335</color>
 
 </resources>

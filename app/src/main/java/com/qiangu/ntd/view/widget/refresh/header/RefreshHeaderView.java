@@ -41,7 +41,7 @@ public class RefreshHeaderView extends RelativeLayout
     protected void onFinishInflate() {
         super.onFinishInflate();
         ivRefresh = (ImageView) findViewById(R.id.ivRefresh);
-         //ivRefresh.setImageResource(R.drawable.header_animation);
+       //   ivRefresh.setImageResource(R.drawable.header_animation);
         mAnimDrawable = (AnimationDrawable) ivRefresh.getDrawable();
     }
 
