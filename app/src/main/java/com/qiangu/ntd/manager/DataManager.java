@@ -5,9 +5,11 @@ import com.qiangu.ntd.base.RxSchedulers;
 import com.qiangu.ntd.dao.ResponseHandle;
 import com.qiangu.ntd.dao.retrofit.RetrofitDao;
 import com.qiangu.ntd.model.request.AppIdApplyRequest;
-import com.qiangu.ntd.model.request.GetVerifyCodeRequest;
+import com.qiangu.ntd.model.request.LoginRequest;
 import com.qiangu.ntd.model.request.RefreshLoginRequest;
+import com.qiangu.ntd.model.request.RegistRequest;
 import com.qiangu.ntd.model.request.TokenApplyRequest;
+import com.qiangu.ntd.model.request.VerifyCodeRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
 import com.qiangu.ntd.model.response.AppInfo;
 import com.qiangu.ntd.model.response.Base;
@@ -74,11 +76,42 @@ public class DataManager {
     //                       .compose(RxSchedulers.io_main());
     //}
 
+
     public static Observable<Base> getVerifyCode(String tel) {
         return RetrofitDao.getInstance()
                           .getApiService()
-                          .getVerifyCode(new GetVerifyCodeRequest(
-                                  tel))
+                          .getVerifyCode(tel)
+                          .flatMap(ResponseHandle.newEntityData())
+                          //.retry(ResponseHandle.canRetry())
+                          .compose(RxSchedulers.io_main());
+    }
+
+
+    public static Observable<Base> verifyCode(String tel, String code) {
+        return RetrofitDao.getInstance()
+                          .getApiService()
+                          .verifyCode(new VerifyCodeRequest(tel, code))
+                          .flatMap(ResponseHandle.newEntityData())
+                          //.retry(ResponseHandle.canRetry())
+                          .compose(RxSchedulers.io_main());
+    }
+
+
+    public static Observable<Base> registUser(String tel, String ntdNo, String password, String repPassword) {
+        return RetrofitDao.getInstance()
+                          .getApiService()
+                          .registUser(new RegistRequest(tel, ntdNo, password,
+                                  repPassword))
+                          .flatMap(ResponseHandle.newEntityData())
+                          //.retry(ResponseHandle.canRetry())
+                          .compose(RxSchedulers.io_main());
+    }
+
+
+    public static Observable<User> login(String ntdNo, String password) {
+        return RetrofitDao.getInstance()
+                          .getApiService()
+                          .login(new LoginRequest(ntdNo, password))
                           .flatMap(ResponseHandle.newEntityData())
                           //.retry(ResponseHandle.canRetry())
                           .compose(RxSchedulers.io_main());

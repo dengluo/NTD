@@ -7,19 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class LoginRequest extends BaseRequest{
-    @SerializedName("mobile") public String mobile;
-    @SerializedName("verifyCode") public String verifyCode;
-    @SerializedName("graphicVerifyCode") public String graphicVerifyCode;
-
-
-    public LoginRequest(String mobile, String verifyCode) {
-        this.mobile = mobile;
-        this.verifyCode = verifyCode;
-    }
-
-    public LoginRequest(String mobile, String verifyCode, String graphicVerifyCode) {
-        this.mobile = mobile;
-        this.verifyCode = verifyCode;
-        this.graphicVerifyCode = graphicVerifyCode;
+    @SerializedName("ntdNo") public String ntdNo;
+    @SerializedName("password") public String password;
+    public LoginRequest(String ntdNo, String password) {
+        this.ntdNo = ntdNo;
+        this.password = password;
     }
 }

@@ -24,12 +24,19 @@
     <string name="load_ing">加载中...</string>
     <string name="sendSmsIng">发送验证码中...</string>
     <string name="sendSmsSuccess">发送验证码成功!</string>
+    <string name="verifyCodeIng">验证码验证中...</string>
     <string name="phone_cannot_be_empty">请输入正确的手机号!</string>
     <string name="verification_code_cannot_be_empty">请输入验证码!</string>
     <string name="graph_verification_code_cannot_be_empty">请输入图形验证码!</string>
     <string name="loginIng">登录中...</string>
     <string name="loginSuccess">登录成功!</string>
 
+    <string name="registerIng">注册中...</string>
+    <string name="registerSuccess">注册成功!</string>
+
+    <string name="card_number_cannot_be_empty">请输入正确的卡号!</string>
+    <string name="password_cannot_be_empty">请输入正确的密码!</string>
+    <string name="confirm_cannot_be_empty">请输入正确的确认密码!</string>
     <!-- 版本更新 -->
     <string name="system_download_component_disable">下载服务不可用,请您启用</string>
     <string name="system_download_description">版本更新</string>

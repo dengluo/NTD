@@ -411,11 +411,11 @@ public class MainActivity extends BaseActivity {
             case R.id.ivUserHead:
                 ActivityUtils.launchActivity(mContext, LoginActivity.class);
                 //  ChangeAvatar();
-                SelectPicWayDialogFragment selectPicWayDialogFragment
-                        = SelectPicWayDialogFragment.newInstance("", "");
-                //设置目标Fragment
-                selectPicWayDialogFragment.show(getSupportFragmentManager(),
-                        "selectPicWayDialogFragment");
+                //SelectPicWayDialogFragment selectPicWayDialogFragment
+                //        = SelectPicWayDialogFragment.newInstance("", "");
+                ////设置目标Fragment
+                //selectPicWayDialogFragment.show(getSupportFragmentManager(),
+                //        "selectPicWayDialogFragment");
                 break;
             case R.id.tvSetting:
                 ActivityUtils.launchActivity(mContext, SettingActivity.class);

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,7 +25,7 @@ import com.qiangu.ntd.view.dialog.AreaCodeDialogFragment;
 
 public class RegisteredActivity extends BaseActivity {
 
-    @BindView(R.id.etPassword) EditText mEtPassword;
+    @BindView(R.id.etVerificationCode) EditText mEtVerificationCode;
     @BindView(R.id.cbProtocol) CheckBox mCbProtocol;
     @BindView(R.id.tvForgetPassword) TextView mTvForgetPassword;
     @BindView(R.id.etPhone) EditText mEtPhone;
@@ -54,7 +53,8 @@ public class RegisteredActivity extends BaseActivity {
         StatusBarUtil.setTranslucentForImageViewInFragment(
                 RegisteredActivity.this, 0, null);
         mEtPhone.addTextChangedListener(new EditCodeChangedListener());
-        mEtPassword.addTextChangedListener(new EditCodeChangedListener());
+        mEtVerificationCode.addTextChangedListener(
+                new EditCodeChangedListener());
         mLoginTimeCount = new LoginTimeCount(60000, 1000, mBtnSendCode,
                 mContext);//构造CountDownTimer对象
     }
@@ -85,6 +85,7 @@ public class RegisteredActivity extends BaseActivity {
                 break;
 
             case R.id.btnNext:
+                verifyCode();
                 break;
 
             case R.id.btnSendCode:
@@ -117,42 +118,12 @@ public class RegisteredActivity extends BaseActivity {
 
 
         @Override public void afterTextChanged(Editable editable) {
-            if (mEtPhone.length() == 14 && mEtPassword.length() == 11) {
+            if (mEtPhone.length() == 11 && mEtVerificationCode.length() == 6) {
                 mBtnNext.setEnabled(true);
             }
             else {
                 mBtnNext.setEnabled(false);
             }
-            //    else {
-            //        if (mEtVerificationCode.length() == 6 &&
-            //                mEtPhone.length() == 11) {
-            //            mBtnLogin.setEnabled(true);
-            //        }
-            //        else {
-            //            mBtnLogin.setEnabled(false);
-            //        }
-            //    }
-            //    if (mEtPhone.length() < 11) {
-            //        mBtnSendCode.setEnabled(false);
-            //    }
-            //
-            //    if (mEtPhone.length() == 11) {
-            //        if (mBtnSendCode.getText().toString().trim().equals("获取验证码")) {
-            //            mEtVerificationCode.setEnabled(false);
-            //            mBtnSendCode.setEnabled(true);
-            //        }
-            //        if (mBtnSendCode.getText().toString().trim().contains("s")) {
-            //            mBtnSendCode.setEnabled(false);
-            //        }
-            //        if (mBtnSendCode.getText().toString().trim().equals("重新获取")) {
-            //            mBtnSendCode.setEnabled(true);
-            //        }
-            //
-            //        if (mIsLoginFailure) {
-            //            mBtnSendCode.setEnabled(true);
-            //            mIsLoginFailure = false;
-            //        }
-            //    }
         }
     }
 
@@ -173,7 +144,6 @@ public class RegisteredActivity extends BaseActivity {
 
 
                        @Override public void onError(ErrorThrowable throwable) {
-                           Log.d("result","阿斯顿");
                            mProgressDialogUtils.hideProgress();
                            ToastUtils.showLongToast(throwable.msg + "");
                        }
@@ -183,10 +153,49 @@ public class RegisteredActivity extends BaseActivity {
                            ToastUtils.showLongToast("发送成功,请注意查收!");
                            mProgressDialogUtils.hideProgress();
                            mLoginTimeCount.start();
-                           mEtPassword.setEnabled(true);
+                           mEtVerificationCode.setEnabled(true);
                            //mEtVerificationCode.setText("");
-                           mEtPassword.requestFocus();//获取焦点 光标出现
+                           mEtVerificationCode.requestFocus();//获取焦点 光标出现
                            //KeyboardUtils.hideSoftInput(LoginActivity.this);
+                       }
+                   });
+    }
+
+
+    private void verifyCode() {
+        String phone = mEtPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone) || phone.length() < 11) {
+            ToastUtils.showLongToast(R.string.phone_cannot_be_empty);
+            return;
+        }
+        String verificationCode = mEtVerificationCode.getText()
+                                                     .toString()
+                                                     .trim();
+        if (TextUtils.isEmpty(verificationCode)) {
+            ToastUtils.showLongToast(
+                    R.string.verification_code_cannot_be_empty);
+            return;
+        }
+        DataManager.verifyCode(phone, verificationCode)
+                   .compose(bindToLifecycle())
+                   .subscribe(new CObserver<Base>() {
+                       @Override public void onPrepare() {
+                           mProgressDialogUtils.showProgress(
+                                   R.string.verifyCodeIng);
+                       }
+
+
+                       @Override public void onError(ErrorThrowable throwable) {
+                           mProgressDialogUtils.hideProgress();
+                           ToastUtils.showLongToast(throwable.msg + "");
+                       }
+
+
+                       @Override public void onSuccess(Base base) {
+                           mProgressDialogUtils.hideProgress();
+                           ActivityUtils.launchActivity(mContext,
+                                   RegisteredInfoActivity.class,
+                                   RegisteredInfoActivity.buildBundle(phone));
                        }
                    });
     }

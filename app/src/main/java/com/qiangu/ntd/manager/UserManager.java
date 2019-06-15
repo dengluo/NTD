@@ -126,13 +126,12 @@ public class UserManager {
 
 
     //登录
-    public Observable<User> login(String mobile, String smsCode, String graphicVerifyCode) {
-        //return DataManager.login(mobile, smsCode, graphicVerifyCode)
-        //                  .flatMap(user -> {
-        //                      setUser(user);
-        //                      return Observable.just(user);
-        //                  });
-        return null;
+    public Observable<User> login(String mobile,String password) {
+        return DataManager.login(mobile, password)
+                          .flatMap(user -> {
+                              setUser(user);
+                              return Observable.just(user);
+                          });
     }
 
 
@@ -173,7 +172,6 @@ public class UserManager {
             User user = UserManager.getInstance().getUser();
             String timestamp = String.valueOf(
                     System.currentTimeMillis() / 1000);
-            subscriber.onNext(user.authenTicket);
             subscriber.onNext(timestamp);
             subscriber.onComplete();
         })
@@ -181,8 +179,6 @@ public class UserManager {
                          .buffer(2)
                          .flatMap(strings -> DataManager.refreshLogin(strings))
                          .flatMap(user -> {
-                             Log.d("result",
-                                     user.nickname + "getRefreshLoginParams()");
                              // String displayName = user.displayName;
                              UserManager.getInstance().setUser(user);
                              //  user.displayName = displayName;

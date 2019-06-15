@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etVerificationCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,15 +120,14 @@
                 android:paddingBottom="20dp"
                 android:layout_marginRight="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_30"
-                android:hint="请输入登录密码"
+                android:hint="请输入验证码"
                 android:textColorHint="#ffb4b5c1"
                 android:background="@null"
                 android:textColor="@color/textContentColor"
                 android:textSize="@dimen/small_text"
                 android:cursorVisible="true"
                 android:focusableInTouchMode="true"
-                android:inputType="numberPassword"
-                android:maxLength="11"
+                android:maxLength="6"
                 android:maxLines="1"
                 android:textCursorDrawable="@null"/>
             <Button
