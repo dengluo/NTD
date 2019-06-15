@@ -12,12 +12,6 @@ public class BaseHead extends BaseRequest {
     public BaseHead() {
     }
 
-
-    public BaseHead(String version) {
-        this.version = version;
-    }
-
-
     //public BaseHead(String version, String filterFlag) {
     //    this.filterFlag = filterFlag;
     //}

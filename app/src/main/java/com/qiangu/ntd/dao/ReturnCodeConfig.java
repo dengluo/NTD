@@ -10,7 +10,7 @@ public class ReturnCodeConfig {
 
 	/** 空数据返回码 */
 	public static String CODE_EMPTY = "-0x1000";
-	public static String CODE_SUCCESS = "-0x1200";
+	public static int CODE_SUCCESS = 0;
 	public static String CODE_LOCAL_EMPTY = "-0x1000";
 	/** 无网络返回码 */
 	public static final String CODE_NO_NETWORK = "-0x1001";
@@ -18,10 +18,10 @@ public class ReturnCodeConfig {
 	
 	private static ReturnCodeConfig instance;
 	
-	public String successCode;
+	public int successCode;
 	
 	private ReturnCodeConfig() {
-		successCode ="0";
+		successCode =0;
 	}
 	
 	public static ReturnCodeConfig getInstance() {
@@ -35,7 +35,7 @@ public class ReturnCodeConfig {
 	 * 设置成功的返回码, 用来判断
 	 * @param successCode
 	 */
-	public void initReturnCode(String successCode, String emptyCode) {
+	public void initReturnCode(int successCode, String emptyCode) {
 		this.successCode = successCode;
 		ReturnCodeConfig.CODE_SUCCESS = successCode;
 		ReturnCodeConfig.CODE_EMPTY = emptyCode;
@@ -59,7 +59,7 @@ public class ReturnCodeConfig {
 	 * @param code
 	 * @return
 	 */
-	public boolean isSuccess(String code) {
+	public boolean isSuccess(int code) {
 		return code == successCode;
 	}
 	

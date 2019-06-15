@@ -2,7 +2,9 @@ package com.qiangu.ntd.ui.user;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +17,11 @@ import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.ActivityUtils;
 import com.qiangu.ntd.base.utils.LoginTimeCount;
+import com.qiangu.ntd.base.utils.ToastUtils;
+import com.qiangu.ntd.dao.CObserver;
+import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
+import com.qiangu.ntd.manager.DataManager;
+import com.qiangu.ntd.model.response.Base;
 import com.qiangu.ntd.view.dialog.AreaCodeDialogFragment;
 
 public class RegisteredActivity extends BaseActivity {
@@ -45,8 +52,7 @@ public class RegisteredActivity extends BaseActivity {
 
     @Override protected void initView(Bundle savedInstanceState) {
         StatusBarUtil.setTranslucentForImageViewInFragment(
-                RegisteredActivity.this, 0,
-                null);
+                RegisteredActivity.this, 0, null);
         mEtPhone.addTextChangedListener(new EditCodeChangedListener());
         mEtPassword.addTextChangedListener(new EditCodeChangedListener());
         mLoginTimeCount = new LoginTimeCount(60000, 1000, mBtnSendCode,
@@ -64,9 +70,9 @@ public class RegisteredActivity extends BaseActivity {
     }
 
 
-    @OnClick({ R.id.ibtBack, R.id.cbProtocol,
-                     R.id.tvForgetPassword, R.id.btnNext, R.id.btnSendCode,
-                     R.id.tvAreaCode }) public void onViewClicked(View view) {
+    @OnClick({ R.id.ibtBack, R.id.cbProtocol, R.id.tvForgetPassword,
+                     R.id.btnNext, R.id.btnSendCode, R.id.tvAreaCode })
+    public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtBack:
                 finish();
@@ -82,7 +88,8 @@ public class RegisteredActivity extends BaseActivity {
                 break;
 
             case R.id.btnSendCode:
-                mLoginTimeCount.start();
+
+                sendSms();
                 break;
             case R.id.tvAreaCode:
                 AreaCodeDialogFragment areaCodeDialogFragment
@@ -147,5 +154,40 @@ public class RegisteredActivity extends BaseActivity {
             //        }
             //    }
         }
+    }
+
+
+    private void sendSms() {
+        String phone = mEtPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone) || phone.length() < 11) {
+            ToastUtils.showLongToast(R.string.phone_cannot_be_empty);
+            return;
+        }
+        DataManager.getVerifyCode(phone)
+                   .compose(bindToLifecycle())
+                   .subscribe(new CObserver<Base>() {
+                       @Override public void onPrepare() {
+                           mProgressDialogUtils.showProgress(
+                                   R.string.sendSmsIng);
+                       }
+
+
+                       @Override public void onError(ErrorThrowable throwable) {
+                           Log.d("result","阿斯顿");
+                           mProgressDialogUtils.hideProgress();
+                           ToastUtils.showLongToast(throwable.msg + "");
+                       }
+
+
+                       @Override public void onSuccess(Base base) {
+                           ToastUtils.showLongToast("发送成功,请注意查收!");
+                           mProgressDialogUtils.hideProgress();
+                           mLoginTimeCount.start();
+                           mEtPassword.setEnabled(true);
+                           //mEtVerificationCode.setText("");
+                           mEtPassword.requestFocus();//获取焦点 光标出现
+                           //KeyboardUtils.hideSoftInput(LoginActivity.this);
+                       }
+                   });
     }
 }

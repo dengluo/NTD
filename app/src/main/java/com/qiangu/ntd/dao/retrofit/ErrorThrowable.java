@@ -6,24 +6,15 @@ package com.qiangu.ntd.dao.retrofit;
  * @version: V1.0
  */
 public class ErrorThrowable extends Throwable {
-
-    public String retStatus;
-
-    public String errorMsg;
-    public String errorCode;
-
-
-    public ErrorThrowable(String retStatus, String errorCode, String errorMsg) {
-        this.retStatus = retStatus;
-        this.errorCode=errorCode;
-        this.errorMsg = errorMsg;
+    public String msg;
+    public int code;
+    public ErrorThrowable(int code, String msg) {
+        this.code=code;
+        this.msg = msg;
     }
 
-    public ErrorThrowable(String retStatus, String errorMsg) {
-        this.retStatus = retStatus;
-        this.errorMsg= errorMsg;
+    public ErrorThrowable(String msg) {
+        this.msg= msg;
     }
-    @Override public String toString() {
-        return "retStatus:" + retStatus + ", errorMsg:" +errorMsg;
-    }
+
 }

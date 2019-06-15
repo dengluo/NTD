@@ -152,8 +152,8 @@ public class TokenManager {
                     }
                     else {
                         return Observable.error(
-                                new ErrorThrowable(appInfoResponse.retStatus,
-                                        appInfoResponse.errorMsg));
+                                new ErrorThrowable(
+                                        appInfoResponse.msg));
                     }
                 });
             }
@@ -195,8 +195,7 @@ public class TokenManager {
                               }
                               else {
                                   return Observable.error(new ErrorThrowable(
-                                          tokenInfoResponse.retStatus,
-                                          tokenInfoResponse.errorMsg));
+                                          tokenInfoResponse.msg));
                               }
                           });
     }

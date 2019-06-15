@@ -1,6 +1,6 @@
 package com.qiangu.ntd.dao;
 
-import android.text.TextUtils;
+import android.util.Log;
 import com.qiangu.ntd.app.Constant;
 import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
 import io.reactivex.Observer;
@@ -24,22 +24,13 @@ public abstract class CObserver<T> implements Observer<T> {
 
 
     @Override public void onError(Throwable e) {
-        if (e == null) {
-            //String retStatus, String errorMsg
-            onError(new ErrorThrowable(ReturnCode.LOCAL_UNKNOWN_ERROR,
-                    Constant.DEBUG ? "throwable is null" : ""));
-        }
-        else if (e instanceof ErrorThrowable) {
-            onError(e);
-            if (!TextUtils.isEmpty(((ErrorThrowable) e).errorCode) &&
-                    ((ErrorThrowable) e).errorCode.equals(
-                            ReturnCode.CODE_USER_FREEZE)) {
-                //EventBus.getDefault().post(new LoginOutEvent());
-            }
-        }
-        else {
-            onError(new ErrorThrowable(ReturnCode.LOCAL_ERROR_TYPE_ERROR,
-                    e.getMessage()));
+        if(e == null) {
+            onError(new ErrorThrowable(ReturnCode.LOCAL_UNKNOWN_ERROR, Constant.DEBUG ? "throwable is null" : ""));
+        } else if(e instanceof ErrorThrowable){
+            Log.d("result",((ErrorThrowable) e).msg+"!"+((ErrorThrowable) e).code);
+            onError((ErrorThrowable) e);
+        } else {
+            onError(new ErrorThrowable(ReturnCode.LOCAL_ERROR_TYPE_ERROR, e.getMessage()));
         }
     }
 

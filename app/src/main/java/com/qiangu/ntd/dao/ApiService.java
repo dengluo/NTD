@@ -1,10 +1,12 @@
 package com.qiangu.ntd.dao;
 
 import com.qiangu.ntd.model.request.AppIdApplyRequest;
+import com.qiangu.ntd.model.request.GetVerifyCodeRequest;
 import com.qiangu.ntd.model.request.RefreshLoginRequest;
 import com.qiangu.ntd.model.request.TokenApplyRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
 import com.qiangu.ntd.model.response.AppInfo;
+import com.qiangu.ntd.model.response.Base;
 import com.qiangu.ntd.model.response.User;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -27,4 +29,8 @@ public interface ApiService {
     //刷新登录验证票
     @POST("tpurse/user/refreshLogin") Observable<User> refreshLogin(
             @Body RefreshLoginRequest refreshLoginRequest);
+
+    //获取验证码
+    @POST("userInfo/getVerifyCode") Observable<Base> getVerifyCode(
+            @Body GetVerifyCodeRequest getVerifyCodeRequest);
 }

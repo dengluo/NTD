@@ -42,7 +42,7 @@ public abstract class BaseFuncActivity extends SupportActivity {
 
 
             @Override public void onError(ErrorThrowable throwable) {
-                ToastUtils.showLongToast(throwable.errorMsg);
+                ToastUtils.showLongToast(throwable.msg);
                 if (loadingRes != -1) {
                     mProgressDialogUtils.hideProgress();
                 }
@@ -68,7 +68,7 @@ public abstract class BaseFuncActivity extends SupportActivity {
 
             @Override public void onError(ErrorThrowable throwable) {
                 mProgressDialogUtils.hideProgress();
-                ToastUtils.showLongToast(throwable.errorMsg);
+                ToastUtils.showLongToast(throwable.msg);
 
             }
 

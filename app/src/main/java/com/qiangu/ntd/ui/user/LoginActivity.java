@@ -203,6 +203,6 @@ public class LoginActivity extends BaseActivity {
         //setResult(RESULT_OK,
         //        new Intent().putExtra("user", new Base(-1, msg, "")));
         mProgressDialogUtils.hideProgress();
-        ToastUtils.showLongToast(throwable.errorMsg);
+        ToastUtils.showLongToast(throwable.msg);
     }
 }

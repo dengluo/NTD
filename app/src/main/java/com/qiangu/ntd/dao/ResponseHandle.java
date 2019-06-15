@@ -1,6 +1,5 @@
 package com.qiangu.ntd.dao;
 
-import android.text.TextUtils;
 import android.util.Log;
 import com.google.gson.JsonParseException;
 import com.qiangu.ntd.R;
@@ -10,7 +9,6 @@ import com.qiangu.ntd.dao.exception.EncryptException;
 import com.qiangu.ntd.dao.exception.NoNetworkException;
 import com.qiangu.ntd.dao.exception.RefreshLoginException;
 import com.qiangu.ntd.dao.retrofit.ErrorThrowable;
-import com.qiangu.ntd.manager.TokenManager;
 import com.qiangu.ntd.model.response.BaseResponse;
 import com.qiangu.ntd.model.response.ListData;
 import io.reactivex.Observable;
@@ -113,35 +111,35 @@ public class ResponseHandle {
                     ErrorThrowable errorThrowable = (ErrorThrowable) throwable;
                     //当errorCode==""  时会产生异常 转换异常
 
-                    if (TextUtils.isEmpty(errorThrowable.errorCode)) {
-                        retry = false;
-                    }
-                    else {
-                        switch (errorThrowable.errorCode) {
-                            case ReturnCode.CODE_INVALIDATED_TOKEN:  //token失效
-                                Log.e(TAG, "token失效");
-                                TokenManager.getInstance().resetToken();
-                                break;
-                            case ReturnCode.CODE_INVALIDATED_LOGIN:  //登录信息过期
-                                Log.e(TAG, "登录信息失效");
-                                TokenManager.getInstance().setRefreshLogin();
-                                break;
-
-                            case ReturnCode.CODE_USER_FREEZE:  //用户冻结
-                                Log.e(TAG, "用户冻结");
-                                retry = false;
-                                break;
-
-                            case ReturnCode.CODE_EMPTY:  //数据为空
-                                Log.e(TAG, "数据为空-------------=-");
-                                retry = false;
-                                break;
-                            default:
-                                retry = false;
-                                break;
-                            //}
-                        }
-                    }
+                    //if (TextUtils.isEmpty(errorThrowable.code)) {
+                    //    retry = false;
+                    //}
+                    //else {
+                    //    switch (errorThrowable.code) {
+                    //        case ReturnCode.CODE_INVALIDATED_TOKEN:  //token失效
+                    //            Log.e(TAG, "token失效");
+                    //            TokenManager.getInstance().resetToken();
+                    //            break;
+                    //        case ReturnCode.CODE_INVALIDATED_LOGIN:  //登录信息过期
+                    //            Log.e(TAG, "登录信息失效");
+                    //            TokenManager.getInstance().setRefreshLogin();
+                    //            break;
+                    //
+                    //        case ReturnCode.CODE_USER_FREEZE:  //用户冻结
+                    //            Log.e(TAG, "用户冻结");
+                    //            retry = false;
+                    //            break;
+                    //
+                    //        case ReturnCode.CODE_EMPTY:  //数据为空
+                    //            Log.e(TAG, "数据为空-------------=-");
+                    //            retry = false;
+                    //            break;
+                    //        default:
+                    //            retry = false;
+                    //            break;
+                    //        //}
+                    //    }
+                    //}
                 }
             }
             return retry;
@@ -153,31 +151,32 @@ public class ResponseHandle {
     private static class ReadDataFunc<E> implements Function<E, Observable<E>> {
         @Override public Observable<E> apply(@NonNull E x) throws Exception {
             BaseResponse baseResponse = ((BaseResponse) x);
-            if (baseResponse.retStatus.equals(ReturnCode.CODE_SUCCESS)) {
+            if (baseResponse.code==ReturnCode.CODE_SUCCESS) {
                 return Observable.just(x);
             }
             else {
                 return Observable.error(
-                        new ErrorThrowable(baseResponse.retStatus,
-                                baseResponse.errorCode, baseResponse.errorMsg));
+                        new ErrorThrowable(
+                                baseResponse.code, baseResponse.msg));
             }
         }
     }
+
+
 
     // 读取列表数据
     public static class ReadListFunc<E>
             implements Function<ListData<E>, Observable<ListData<E>>> {
         @Override public Observable<ListData<E>> apply(@NonNull ListData<E> x)
                 throws Exception {
-            if (x.retStatus.equals(ReturnCode.CODE_SUCCESS)) {
+            if (x.code==ReturnCode.CODE_SUCCESS) {
                 if (x.list.size() != 0) {
                     return Observable.just(x);
                 }
                 else {
                     //Log.d("result", "数据为空----------");
                     //{"errorCode":"","errorMsg":"","list":[],"retStatus":"0"}
-                    return Observable.error(new ErrorThrowable(x.retStatus,
-                            ReturnCode.CODE_EMPTY, "数据为空"));
+                    return Observable.error(new ErrorThrowable(x.code, "数据为空"));
                     //return Observable.error(
                     //        new ErrorThrowable(ReturnCode.CODE_EMPTY,
                     //                x.errorCode, "数据为空"));
@@ -185,8 +184,8 @@ public class ResponseHandle {
             }
             else {
                 return Observable.error(
-                        new ErrorThrowable(x.retStatus, x.errorCode,
-                                x.errorMsg));
+                        new ErrorThrowable(x.code,
+                                x.msg));
             }
         }
     }

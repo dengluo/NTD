@@ -50,7 +50,7 @@ public abstract class BaseFuncFragment extends SupportFragment {
 
 
             @Override public void onError(ErrorThrowable throwable) {
-                ToastUtils.showLongToast(throwable.errorMsg);
+                ToastUtils.showLongToast(throwable.msg);
                 if (loadingRes != -1) {
                     mProgressDialogUtils.hideProgress();
                 }
@@ -75,7 +75,7 @@ public abstract class BaseFuncFragment extends SupportFragment {
 
 
             @Override public void onError(ErrorThrowable throwable) {
-                ToastUtils.showLongToast(throwable.errorMsg);
+                ToastUtils.showLongToast(throwable.msg);
 
             }
 

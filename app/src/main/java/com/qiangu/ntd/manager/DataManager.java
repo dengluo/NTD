@@ -1,13 +1,16 @@
 package com.qiangu.ntd.manager;
 
 import com.qiangu.ntd.app.AppContext;
+import com.qiangu.ntd.base.RxSchedulers;
 import com.qiangu.ntd.dao.ResponseHandle;
 import com.qiangu.ntd.dao.retrofit.RetrofitDao;
 import com.qiangu.ntd.model.request.AppIdApplyRequest;
+import com.qiangu.ntd.model.request.GetVerifyCodeRequest;
 import com.qiangu.ntd.model.request.RefreshLoginRequest;
 import com.qiangu.ntd.model.request.TokenApplyRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
 import com.qiangu.ntd.model.response.AppInfo;
+import com.qiangu.ntd.model.response.Base;
 import com.qiangu.ntd.model.response.User;
 import io.reactivex.Observable;
 import java.util.List;
@@ -58,5 +61,26 @@ public class DataManager {
                                   params.get(1)))
                           .flatMap(ResponseHandle.newEntityData());
     }
+    //使用手机短信登录
+    //public static Observable<User> login(String mobile, String verifyCode, String graphicVerifyCode) {
+    //    return RetrofitDao.getInstance()
+    //                      .getApiService()
+    //                      .login(new LoginRequest(
+    //                              mobile,
+    //                              verifyCode,
+    //                              graphicVerifyCode))
+    //                       .flatMap(ResponseHandle.newEntityData())
+    //                       .retry(ResponseHandle.canRetry())
+    //                       .compose(RxSchedulers.io_main());
+    //}
 
+    public static Observable<Base> getVerifyCode(String tel) {
+        return RetrofitDao.getInstance()
+                          .getApiService()
+                          .getVerifyCode(new GetVerifyCodeRequest(
+                                  tel))
+                          .flatMap(ResponseHandle.newEntityData())
+                          //.retry(ResponseHandle.canRetry())
+                          .compose(RxSchedulers.io_main());
+    }
 }

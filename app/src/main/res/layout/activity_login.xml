@@ -47,7 +47,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:textSize="60dp"
-            android:textColor="@color/White"
+            android:textColor="#3D488A"
             android:text="Welcom"/>
     </RelativeLayout>
 

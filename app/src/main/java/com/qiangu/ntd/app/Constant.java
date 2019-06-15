@@ -9,11 +9,9 @@ package com.qiangu.ntd.app;
  */
 public class Constant {
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
-    public static final String APPLICATION_ID = "com.tempus.wallet";
-
-    private static final boolean USE_REAL_SERVER = true;
+    private static final boolean USE_REAL_SERVER = false;
 
     private static final String SERVER_REAL
             = "https://tpurse.tempus.cn/tpurse/";//生产地址
@@ -21,7 +19,7 @@ public class Constant {
     //http://172.18.126.209:8081
     //http://172.18.126.54:7088
     public static final String SERVER_TEST
-            = "http://172.18.126.54:7088/tpurse/";//测试地址
+            = "http://192.168.1.54:8088/common/";//测试地址
     //public static final String SERVER_TEST
 
     //        = "http://172.18.126.209:8081/tpurse/";// 预生产地址

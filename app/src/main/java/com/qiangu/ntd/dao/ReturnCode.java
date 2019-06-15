@@ -10,26 +10,26 @@ package com.qiangu.ntd.dao;
 public class ReturnCode {
 
     /** 未知错误 **/
-    public static final String LOCAL_UNKNOWN_ERROR = "0x10100";
+    public static final int LOCAL_UNKNOWN_ERROR = 0x10100 ;
     /** 无网络返回码 */
-    public static final String LOCAL_NO_NETWORK = "0x10101";
+    public static final int LOCAL_NO_NETWORK = 0x10101 ;
     /** 获取Token失败 */
-    public static final String LOCAL_GET_TOKEN_ERROR = "0x10102";
+    public static final int LOCAL_GET_TOKEN_ERROR =  0x10102 ;
     /** 请求接口失败 */
-    public static final String LOCAL_SERVER_ERROR ="0x10102";
+    public static final int LOCAL_SERVER_ERROR = 0x10102 ;
     /** 链接网络失败，或者系统异常 */
-    public static final String LOCAL_UNKNOWN_HOST_ERROR = "0x10104";
+    public static final int LOCAL_UNKNOWN_HOST_ERROR =  0x10104 ;
     /** 接口解析数据异常 */
-    public static final String LOCAL_GSON_ERROR = "0x10105";
+    public static final int LOCAL_GSON_ERROR =  0x10105 ;
     /** 解密解密失败 */
-    public static final String LOCAL_ENCRYPT_ERROR ="0x10106";
+    public static final int LOCAL_ENCRYPT_ERROR = 0x10106 ;
     /** 刷新验证票失败 **/
-    public static final String LOCAL_REFRESH_LOGIN_ERROR = "0x10107";
+    public static final int LOCAL_REFRESH_LOGIN_ERROR =  0x10107 ;
     /**  */
-    public static final String LOCAL_ERROR_TYPE_ERROR = "0x10108";
+    public static final int LOCAL_ERROR_TYPE_ERROR = 0x10108 ;
 
     /** 成功 */
-    public static final String CODE_SUCCESS ="0";
+    public static final int CODE_SUCCESS =0;
     /** 失败 */
     public static final int CODE_ERROR = -1;
 
