@@ -1,5 +1,8 @@
 package com.qiangu.ntd.ui.home.recharge;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,8 @@ import com.jaeger.library.StatusBarUtil;
 import com.qiangu.ntd.R;
 import com.qiangu.ntd.base.BaseActivity;
 import com.qiangu.ntd.base.utils.ActivityUtils;
+import com.qiangu.ntd.base.utils.StringUtils;
+import com.qiangu.ntd.base.utils.ToastUtils;
 
 public class RechargeActivity extends BaseActivity {
     @BindView(R.id.btnRedemptionRecord) Button mBtnRedemptionRecord;
@@ -63,6 +68,17 @@ public class RechargeActivity extends BaseActivity {
                         RechargeRecordActivity.class);
                 break;
             case R.id.btnCopyAddress:
+                if (!StringUtils.empty(mTvAddress.getText().toString())) {
+                    //获取剪贴板管理器：
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    // 创建普通字符型ClipData
+                    ClipData mClipData = ClipData.newPlainText("Label", mTvAddress.getText().toString());
+                    // 将ClipData内容放到系统剪贴板里。
+                    cm.setPrimaryClip(mClipData);
+                    ToastUtils.showShortToast(getString(R.string.yifuzhi));
+                } else {
+                    ToastUtils.showShortToast(getString(R.string.dizhiweikong));
+                }
                 break;
         }
     }

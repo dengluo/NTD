@@ -61,4 +61,6 @@
     <string name="is_downloading">正在下载中，请稍后</string>
     <string name="money_input">1234567890.</string>
     <string name="re_verification">%1$ss</string>
+    <string name="yifuzhi">已复制</string>
+    <string name="dizhiweikong">地址为空</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.qiangu.ntd.dao;
 
 import com.qiangu.ntd.model.request.AppIdApplyRequest;
+import com.qiangu.ntd.model.request.RechargeRequest;
 import com.qiangu.ntd.model.request.RefreshLoginRequest;
 import com.qiangu.ntd.model.request.TokenApplyRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
@@ -53,4 +54,20 @@ public interface ApiService {
     //用户退出登录
     @GET("userInfo/logout") Observable<Base> loginOut(
             @Query("token") String token);
+
+    //获取币币钱包地址
+    @GET("common/recharge/getBbAddress/") Observable<RechargeRequest> getBbAddress(
+            @Body RechargeRequest rechargeRequest);
+
+    //查询钱包地址是否存在
+    @GET("common/recharge/verifyBbAddress/") Observable<RechargeRequest> verifyBbAddress(
+            @Body RechargeRequest rechargeRequest);
+
+    //NTD充值接口
+    @GET("common/recharge/rechargeNtd/") Observable<RechargeRequest> rechargeNtd(
+            @Body RechargeRequest rechargeRequest);
+
+    //根据NTD充值流水号查询充值记录
+    @GET("common/recharge/getRechargeRecord/") Observable<RechargeRequest> getRechargeRecord(
+            @Body RechargeRequest rechargeRequest);
 }
