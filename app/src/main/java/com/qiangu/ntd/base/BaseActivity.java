@@ -1,7 +1,10 @@
 package com.qiangu.ntd.base;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -70,6 +73,19 @@ public abstract class BaseActivity extends BaseFuncActivity
     @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(ActivityEvent.CREATE);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            int REQUEST_CODE_CONTACT = 101;
+            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            //验证是否许可权限
+            for (String str : permissions) {
+                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
+                    //申请权限
+                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
+                    return;
+                }
+            }
+        }
         //StatusBarFontHelper.setStatusBarMode(this, true);
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
         //不抢占事件，默认关（事件将先由子View处理再由滑动关闭处理）

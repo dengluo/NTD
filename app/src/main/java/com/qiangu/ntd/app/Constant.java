@@ -19,7 +19,7 @@ public class Constant {
     //http://172.18.126.209:8081
     //http://172.18.126.54:7088
     public static final String SERVER_TEST
-            = "http://192.168.1.54:8088/common/";//测试地址
+            = "http://192.168.1.54:8088/";//测试地址
     //public static final String SERVER_TEST
 
     //        = "http://172.18.126.209:8081/tpurse/";// 预生产地址

@@ -10,6 +10,7 @@ import com.qiangu.ntd.model.request.TokenApplyRequest;
 import com.qiangu.ntd.model.response.AccessTokenInfo;
 import com.qiangu.ntd.model.response.AppInfo;
 import com.qiangu.ntd.model.response.Base;
+import com.qiangu.ntd.model.response.Recharge;
 import com.qiangu.ntd.model.response.User;
 import io.reactivex.Observable;
 import java.util.List;
@@ -121,5 +122,14 @@ public class DataManager {
                           .flatMap(ResponseHandle.newEntityData())
                           //.retry(ResponseHandle.canRetry())
                           .compose(RxSchedulers.io_main());
+    }
+
+    public static Observable<Recharge> getBbAddress(String token) {
+        return RetrofitDao.getInstance()
+                .getApiService()
+                .getBbAddress(token)
+                .flatMap(ResponseHandle.newEntityData())
+                //.retry(ResponseHandle.canRetry())
+                .compose(RxSchedulers.io_main());
     }
 }
